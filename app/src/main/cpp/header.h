@@ -13,5 +13,8 @@
 #include <android/asset_manager.h>
 #include <android/asset_manager_jni.h>
 
+#include "Glm/glm.hpp"
+#include "Glm/ext.hpp"
+
 
 #endif //OPENGLES_DOC_HEADER_H

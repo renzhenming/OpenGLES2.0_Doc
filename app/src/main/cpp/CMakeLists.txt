@@ -24,6 +24,8 @@ add_library( # Sets the name of the library.
         TriangleRender.cpp
         NativeAssetsLoader.cpp
         GLUtils.cpp
+        TriangleRenderSchedulerWithMatrix.cpp
+        TriangleRenderWithMatrix.cpp
         # Provides a relative path to your source file(s).
         )
 

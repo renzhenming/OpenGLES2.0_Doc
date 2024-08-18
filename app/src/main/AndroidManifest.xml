@@ -13,7 +13,10 @@
         android:theme="@style/Theme.OpenGLES_Doc"
         tools:targetApi="31">
         <activity
-            android:name=".simple.SimpleShapeActivity"
+            android:name=".simple.TriangleShapeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".simple.TriangleShapeActivity_with_Matrix"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
