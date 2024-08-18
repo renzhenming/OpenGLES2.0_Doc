@@ -15,6 +15,12 @@ static float vertex_pos[] = {
 
 static float color_pos[] = {1.0f, 1.0f, 1.0f, 1.0f};
 
+static float color[] = {
+        0.0f, 1.0f, 0.0f, 1.0f,
+        1.0f, 0.0f, 0.0f, 1.0f,
+        0.0f, 0.0f, 1.0f, 1.0f
+};
+
 
 GLuint CreateShader(GLenum shader_type, const char *source_code);
 

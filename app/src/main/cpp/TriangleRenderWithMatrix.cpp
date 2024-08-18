@@ -36,14 +36,16 @@ void TriangleRenderWithMatrix::DrawFrame() {
     int positionLocation = glGetAttribLocation(program, "vPosition");
     glEnableVertexAttribArray(positionLocation);
     glVertexAttribPointer(positionLocation, 3, GL_FLOAT, false, 0, vertex_pos);
-    int colorLocation = glGetUniformLocation(program, "vColor");
-    glUniform4fv(colorLocation, 1, color_pos);
+
     GLint modelMatrixLocation = glGetUniformLocation(program, "U_ModelMatrix");
     glUniformMatrix4fv(modelMatrixLocation, 1, GL_FALSE, glm::value_ptr(modelMatrix));
     GLint viewMatrixLocation = glGetUniformLocation(program, "U_ViewMatrix");
     glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, glm::value_ptr(viewMatrix));
     GLint projectionMatrixLocation = glGetUniformLocation(program, "U_ProjectionMatrix");
     glUniformMatrix4fv(projectionMatrixLocation, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
+    GLint colorLocation = glGetAttribLocation(program, "aColor");
+    glVertexAttribPointer(colorLocation, 4, GL_FLOAT, false, 0, color);
+    glEnableVertexAttribArray(colorLocation);
 
     glDrawArrays(GL_TRIANGLES, 0, 3);
     glDisableVertexAttribArray(positionLocation);
