@@ -10,6 +10,10 @@ import com.rzm.opengles_doc.simple.SimpleShapeActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    static {
+        System.loadLibrary("opengles");
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

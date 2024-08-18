@@ -4,13 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.rzm.opengles_doc.R;
+import com.rzm.opengles_doc.MyGlSurfaceView;
+import com.rzm.opengles_doc.render.TriangleRender;
 
 public class SimpleShapeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_simple_shape);
+        TriangleRender triangleRender = new TriangleRender(this);
+        MyGlSurfaceView surfaceView = new MyGlSurfaceView(this, triangleRender);
+        setContentView(surfaceView);
     }
 }

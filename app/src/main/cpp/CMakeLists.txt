@@ -15,13 +15,17 @@ project("opengles_doc")
 # Gradle automatically packages shared libraries with your APK.
 
 add_library( # Sets the name of the library.
-        opengles_doc
+        opengles
 
         # Sets the library as a shared library.
         SHARED
-
+        header.cpp
+        TriangleRenderScheduler.cpp
+        TriangleRender.cpp
+        NativeAssetsLoader.cpp
+        GLUtils.cpp
         # Provides a relative path to your source file(s).
-        native-lib.cpp)
+        )
 
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by
@@ -41,8 +45,8 @@ find_library( # Sets the name of the path variable.
 # build script, prebuilt third-party libraries, or system libraries.
 
 target_link_libraries( # Specifies the target library.
-        opengles_doc
-
+        opengles
+        android GLESv2
         # Links the target library to the log library
         # included in the NDK.
         ${log-lib})
