@@ -19,6 +19,9 @@
             android:name=".simple.TriangleShapeActivity_with_Matrix"
             android:exported="false" />
         <activity
+            android:name=".simple.SquareShapeActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

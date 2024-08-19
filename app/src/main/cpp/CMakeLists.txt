@@ -26,6 +26,8 @@ add_library( # Sets the name of the library.
         GLUtils.cpp
         TriangleRenderSchedulerWithMatrix.cpp
         TriangleRenderWithMatrix.cpp
+        SquareRenderScheduler.cpp
+        SquareRender.cpp
         # Provides a relative path to your source file(s).
         )
 

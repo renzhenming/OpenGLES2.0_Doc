@@ -21,6 +21,16 @@ static float color[] = {
         0.0f, 0.0f, 1.0f, 1.0f
 };
 
+static float trianglePoints[] = {
+        -0.5f, 0.5f, 0.0f, // top left
+        -0.5f, -0.5f, 0.0f, // bottom left
+        0.5f, -0.5f, 0.0f, // bottom right
+        0.5f, 0.5f, 0.0f  // top right
+};
+
+static short triangleIndex[] = {
+        0, 1, 2, 0, 2, 3
+};
 
 GLuint CreateShader(GLenum shader_type, const char *source_code);
 
