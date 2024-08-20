@@ -22,6 +22,9 @@
             android:name=".simple.SquareShapeActivity"
             android:exported="false" />
         <activity
+            android:name=".simple.CubeShapeActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

@@ -28,6 +28,8 @@ add_library( # Sets the name of the library.
         TriangleRenderWithMatrix.cpp
         SquareRenderScheduler.cpp
         SquareRender.cpp
+        CubeRenderScheduler.cpp
+        CubeRender.cpp
         # Provides a relative path to your source file(s).
         )
 
