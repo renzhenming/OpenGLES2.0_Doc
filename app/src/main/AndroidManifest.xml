@@ -25,6 +25,9 @@
             android:name=".simple.CubeShapeActivity"
             android:exported="false" />
         <activity
+            android:name=".simple.TextureImageActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

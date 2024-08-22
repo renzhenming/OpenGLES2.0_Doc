@@ -30,6 +30,9 @@ add_library( # Sets the name of the library.
         SquareRender.cpp
         CubeRenderScheduler.cpp
         CubeRender.cpp
+        TextureImageRenderScheduler.cpp
+        TextureImageRender.cpp
+        stb_image_aug.c
         # Provides a relative path to your source file(s).
         )
 

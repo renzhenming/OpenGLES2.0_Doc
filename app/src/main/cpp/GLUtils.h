@@ -29,13 +29,13 @@ static float cube_colors[] = {
         1.0f, 0.0f, 0.0f, 1.0f,
 };
 
-static short cube_index[]={
-        6,7,4,6,4,5,    //后面
-        6,3,7,6,2,3,    //右面
-        6,5,1,6,1,2,    //下面
-        0,3,2,0,2,1,    //正面
-        0,1,5,0,5,4,    //左面
-        0,7,3,0,4,7,    //上面
+static short cube_index[] = {
+        6, 7, 4, 6, 4, 5,    //后面
+        6, 3, 7, 6, 2, 3,    //右面
+        6, 5, 1, 6, 1, 2,    //下面
+        0, 3, 2, 0, 2, 1,    //正面
+        0, 1, 5, 0, 5, 4,    //左面
+        0, 7, 3, 0, 4, 7,    //上面
 };
 
 static float vertex_pos[] = {
@@ -63,6 +63,22 @@ static short triangleIndex[] = {
         0, 1, 2, 0, 2, 3
 };
 
+static float
+        texture_image_pos[] = {
+        -1.0f, 1.0f,
+        -1.0f, -1.0f,
+        1.0f, 1.0f,
+        1.0f, -1.0f
+};
+
+static float
+        texture_image_coordinate[] = {
+        0.0f, 0.0f,
+        0.0f, 1.0f,
+        1.0f, 0.0f,
+        1.0f, 1.0f,
+};
+
 GLuint CreateShader(GLenum shader_type, const char *source_code);
 
 GLuint CreateProgram(GLuint vertex_shader, GLuint fragment_shader);
@@ -70,5 +86,17 @@ GLuint CreateProgram(GLuint vertex_shader, GLuint fragment_shader);
 GLuint CreateProgram(unsigned char *vertex_shader_code, unsigned char *fragment_shader_code);
 
 static inline void checkGlError(const char *op);
+
+void FlipImage(unsigned char *pixel, int width, int height, int channel_count);
+
+void SwapRGBPixel(unsigned char *pixel, int src0, int src1);
+
+void SwapRGBAPixel(unsigned char *pixel, int src0, int src1);
+
+GLuint CreateTexture2D(void *pixel, int width, int height, GLenum gpu_format, GLenum cpu_format);
+
+GLuint
+CreateTextureFromFile(const char *path, unsigned char *filecontent, int file_size, int &image_width,
+                      int &image_height);
 
 #endif //OPENGLES_DOC_GLUTILS_H

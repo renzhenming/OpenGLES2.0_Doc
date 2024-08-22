@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.rzm.opengles_doc.simple.CubeShapeActivity;
 import com.rzm.opengles_doc.simple.SquareShapeActivity;
+import com.rzm.opengles_doc.simple.TextureImageActivity;
 import com.rzm.opengles_doc.simple.TriangleShapeActivity;
 import com.rzm.opengles_doc.simple.TriangleShapeActivity_with_Matrix;
 
@@ -34,6 +35,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             clazz = SquareShapeActivity.class;
         } else if (id == R.id.cube) {
             clazz = CubeShapeActivity.class;
+        } else if (id == R.id.image) {
+            clazz = TextureImageActivity.class;
         } else {
             clazz = TriangleShapeActivity.class;
         }
