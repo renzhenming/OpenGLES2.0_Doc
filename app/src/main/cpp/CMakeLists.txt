@@ -33,6 +33,8 @@ add_library( # Sets the name of the library.
         TextureImageRenderScheduler.cpp
         TextureImageRender.cpp
         stb_image_aug.c
+        GrayTextureImageRenderScheduler.cpp
+        GrayTextureImageRender.cpp
         # Provides a relative path to your source file(s).
         )
 
