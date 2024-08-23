@@ -39,6 +39,8 @@ add_library( # Sets the name of the library.
         CoolTextureImageRender.cpp
         WarmTextureImageRenderScheduler.cpp
         WarmTextureImageRender.cpp
+        MagnifierTextureImageRenderScheduler.cpp
+        MagnifierTextureImageRender.cpp
         # Provides a relative path to your source file(s).
         )
 

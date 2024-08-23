@@ -37,6 +37,9 @@
             android:name=".simple.WarmTextureImageActivity"
             android:exported="false" />
         <activity
+            android:name=".simple.MagnifierTextureImageActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.rzm.opengles_doc.simple.CoolTextureImageActivity;
 import com.rzm.opengles_doc.simple.CubeShapeActivity;
 import com.rzm.opengles_doc.simple.GrayTextureImageActivity;
+import com.rzm.opengles_doc.simple.MagnifierTextureImageActivity;
 import com.rzm.opengles_doc.simple.SquareShapeActivity;
 import com.rzm.opengles_doc.simple.TextureImageActivity;
 import com.rzm.opengles_doc.simple.TriangleShapeActivity;
@@ -46,6 +47,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             clazz = CoolTextureImageActivity.class;
         } else if (id == R.id.warm) {
             clazz = WarmTextureImageActivity.class;
+        } else if (id == R.id.magnifier) {
+            clazz = MagnifierTextureImageActivity.class;
         } else {
             clazz = TriangleShapeActivity.class;
         }
