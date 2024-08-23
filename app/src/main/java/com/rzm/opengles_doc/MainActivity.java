@@ -13,6 +13,7 @@ import com.rzm.opengles_doc.simple.SquareShapeActivity;
 import com.rzm.opengles_doc.simple.TextureImageActivity;
 import com.rzm.opengles_doc.simple.TriangleShapeActivity;
 import com.rzm.opengles_doc.simple.TriangleShapeActivity_with_Matrix;
+import com.rzm.opengles_doc.simple.WarmTextureImageActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -43,6 +44,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             clazz = GrayTextureImageActivity.class;
         } else if (id == R.id.cool) {
             clazz = CoolTextureImageActivity.class;
+        } else if (id == R.id.warm) {
+            clazz = WarmTextureImageActivity.class;
         } else {
             clazz = TriangleShapeActivity.class;
         }
