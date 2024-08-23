@@ -35,6 +35,8 @@ add_library( # Sets the name of the library.
         stb_image_aug.c
         GrayTextureImageRenderScheduler.cpp
         GrayTextureImageRender.cpp
+        CoolTextureImageRenderScheduler.cpp
+        CoolTextureImageRender.cpp
         # Provides a relative path to your source file(s).
         )
 
