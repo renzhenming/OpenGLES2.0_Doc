@@ -39,24 +39,11 @@ void TextureImageRender::CreateSurface() {
 
 void TextureImageRender::SurfaceChanged(int width, int height) {
     glViewport(0, 0, width, height);
-    float sWH = image_width / (float) image_height;
-    float sWidthHeight = width / (float) height;
+    float ratio = (width > height) ? width / (float) height : height / (float) width;
     if (width > height) {
-        if (sWH > sWidthHeight) {
-            projectionMatrix = glm::ortho(-sWidthHeight * sWH, sWidthHeight * sWH, -1.0f, 1.0f,
-                                          3.0f, 5.0f);
-        } else {
-            projectionMatrix = glm::ortho(-sWidthHeight / sWH, sWidthHeight / sWH, -1.0f, 1.0f,
-                                          3.0f, 5.0f);
-        }
+        projectionMatrix = glm::ortho(-ratio, ratio, -1.0f, 1.0f, 3.0f, 5.0f);
     } else {
-        if (sWH > sWidthHeight) {
-            projectionMatrix = glm::ortho(-1.0f, 1.0f, -1 / sWidthHeight * sWH,
-                                          1 / sWidthHeight * sWH, 3.0f, 5.0f);
-        } else {
-            projectionMatrix = glm::ortho(-1.0f, 1.0f, -sWH / sWidthHeight, sWH / sWidthHeight,
-                                          3.0f, 5.0f);
-        }
+        projectionMatrix = glm::ortho(-1.0f, 1.0f, -ratio, ratio, 3.0f, 5.0f);
     }
 }
 
