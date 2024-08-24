@@ -63,7 +63,7 @@ void
 Cube::translateRotateScale() {
     //平移旋转缩放是对模型矩阵的操作
     modelMatrix = glm::translate(modelMatrix, glm::vec3(0.0, 6.0, 0.0));
-    modelMatrix = glm::rotate(modelMatrix, glm::radians(30.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+    modelMatrix = glm::rotate(modelMatrix, glm::degrees(0.5f), glm::vec3(1.0f, 1.0f, 0.0f));
     modelMatrix = glm::scale(modelMatrix, glm::vec3(2.50, 2.5, 2.5));
 }
 
