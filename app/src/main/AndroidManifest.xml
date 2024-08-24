@@ -43,6 +43,9 @@
             android:name=".simple.BlurTextureImageActivity"
             android:exported="false" />
         <activity
+            android:name=".simple.CubeTransformActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
