@@ -46,6 +46,8 @@ add_library( # Sets the name of the library.
         CubeTransformRenderScheduler.cpp
         CubeTransformRender.cpp
         Cube.cpp
+        CameraRenderScheduler.cpp
+        CameraRender.cpp
         # Provides a relative path to your source file(s).
         )
 
