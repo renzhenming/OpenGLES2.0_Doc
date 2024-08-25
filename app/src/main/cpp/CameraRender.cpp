@@ -85,7 +85,7 @@ void CameraRender::DrawFrame() {
     glUniformMatrix4fv(projectionMatrixLocation, 1, false, glm::value_ptr(projectionMatrix));
 
     glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, cameraOesTexture);
+    glBindTexture(GL_TEXTURE_EXTERNAL_OES, cameraOesTexture);
     glUniform1i(textureLocation, 0);
 
     glEnableVertexAttribArray(positionLocation);
