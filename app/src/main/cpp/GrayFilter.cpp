@@ -16,7 +16,7 @@ GrayFilter::~GrayFilter() {
 
 }
 
-void GrayFilter::init(int width, int height) {
+void GrayFilter::init() {
     int file_size = 0;
     unsigned char *vertex_shader_code = loader->LoadFile("egl_gray_vertex.vs", file_size);
     unsigned char *fragment_shader_code = loader->LoadFile("egl_gray_fragment.fs", file_size);
@@ -24,13 +24,13 @@ void GrayFilter::init(int width, int height) {
     positionLocation = glGetAttribLocation(program, "vPosition");
     coordinateLocation = glGetAttribLocation(program, "vCoordinate");
     textureLocation = glGetUniformLocation(program, "vTexture");
+    __android_log_print(ANDROID_LOG_INFO, "rzm", "init");
+}
 
-    unsigned char *image_content = loader->LoadFile("cat.png", file_size);
-    texture = CreateTextureFromFile("cat.png", image_content, file_size, image_width,
-                                    image_height);
-    __android_log_print(ANDROID_LOG_INFO, "rzm", "image_width=%d,image_height=%d,texture=%d",
-                        image_width,
-                        image_height, texture);
+void GrayFilter::setBitmap(void *pixel, int width, int height, int format) {
+    texture = CreateTexture2D(pixel, width, height, GL_RGBA, GL_RGBA);
+    __android_log_print(ANDROID_LOG_INFO, "rzm", "setBitmap texture = %d，format = %d,", texture,
+                        format);
 }
 
 void GrayFilter::draw() {

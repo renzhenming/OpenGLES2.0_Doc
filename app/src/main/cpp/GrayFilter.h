@@ -22,7 +22,9 @@ public:
 
     ~GrayFilter();
 
-    void init(int width, int height);
+    void init();
+
+    void setBitmap(void *pixel, int width, int height, int format);
 
     void draw();
 };

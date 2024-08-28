@@ -22,7 +22,8 @@ public class EGLOutOfScreenDrawActivity extends AppCompatActivity {
         int width = bmp.getWidth();
         int height = bmp.getHeight();
         EGLBackgroundRender render = new EGLBackgroundRender(this);
-        render.init(bmp, width, height);
+        render.init(width, height);
+        render.setBitmap(bmp);
         Bitmap draw = render.draw();
         if (draw != null) {
             imageView.setImageBitmap(draw);
