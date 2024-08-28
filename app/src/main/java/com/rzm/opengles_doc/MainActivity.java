@@ -13,6 +13,7 @@ import com.rzm.opengles_doc.simple.CameraActivity;
 import com.rzm.opengles_doc.simple.CoolTextureImageActivity;
 import com.rzm.opengles_doc.simple.CubeShapeActivity;
 import com.rzm.opengles_doc.simple.CubeTransformActivity;
+import com.rzm.opengles_doc.simple.EGLOutOfScreenDrawActivity;
 import com.rzm.opengles_doc.simple.GrayTextureImageActivity;
 import com.rzm.opengles_doc.simple.MagnifierTextureImageActivity;
 import com.rzm.opengles_doc.simple.SquareShapeActivity;
@@ -60,6 +61,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             clazz = CubeTransformActivity.class;
         } else if (id == R.id.camera) {
             clazz = CameraActivity.class;
+        } else if (id == R.id.egl) {
+            clazz = EGLOutOfScreenDrawActivity.class;
         } else {
             clazz = TriangleShapeActivity.class;
         }

@@ -17,5 +17,8 @@
 #include "Glm/ext.hpp"
 #include "stb_image_aug.h"
 
+#include <EGL/egl.h>
+#include <EGL/eglext.h>
+
 
 #endif //OPENGLES_DOC_HEADER_H
