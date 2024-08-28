@@ -20,5 +20,7 @@
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
 
+#include "android/bitmap.h"
+
 
 #endif //OPENGLES_DOC_HEADER_H

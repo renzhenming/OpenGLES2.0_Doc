@@ -50,6 +50,7 @@ add_library( # Sets the name of the library.
         CameraRender.cpp
         EglBackgroundRender.cpp
         EglCore.cpp
+        GrayFilter.cpp
         # Provides a relative path to your source file(s).
         )
 
@@ -72,7 +73,9 @@ find_library( # Sets the name of the path variable.
 
 target_link_libraries( # Specifies the target library.
         opengles
-        android GLESv2
+        android
+        jnigraphics
+        GLESv2
         EGL
         # Links the target library to the log library
         # included in the NDK.
