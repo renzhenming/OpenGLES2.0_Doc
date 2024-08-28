@@ -18,7 +18,7 @@ public class EGLOutOfScreenDrawActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_egl_back_env);
         ImageView imageView = findViewById(R.id.mImage);
-        Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.cat);
+        Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.girl);
         int width = bmp.getWidth();
         int height = bmp.getHeight();
         EGLBackgroundRender render = new EGLBackgroundRender(this);

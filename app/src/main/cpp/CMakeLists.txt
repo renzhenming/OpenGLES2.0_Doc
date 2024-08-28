@@ -50,7 +50,7 @@ add_library( # Sets the name of the library.
         CameraRender.cpp
         EglBackgroundRender.cpp
         EglCore.cpp
-        GrayFilter.cpp
+        EGLGrayFilter.cpp
         # Provides a relative path to your source file(s).
         )
 

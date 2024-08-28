@@ -2,12 +2,12 @@
 // Created by 任振铭 on 2024/8/28.
 //
 
-#ifndef OPENGLES_DOC_GRAYFILTER_H
-#define OPENGLES_DOC_GRAYFILTER_H
+#ifndef OPENGLES_DOC_EGLGRAYFILTER_H
+#define OPENGLES_DOC_EGLGRAYFILTER_H
 
 #include "header.h"
 
-class GrayFilter {
+class EGLGrayFilter {
 public:
     GLuint program;
     GLint positionLocation;
@@ -18,9 +18,9 @@ public:
     int image_width;
     int image_height;
 
-    GrayFilter(JNIEnv *env, jobject asset);
+    EGLGrayFilter(JNIEnv *env, jobject asset);
 
-    ~GrayFilter();
+    ~EGLGrayFilter();
 
     void init();
 
@@ -30,4 +30,4 @@ public:
 };
 
 
-#endif //OPENGLES_DOC_GRAYFILTER_H
+#endif //OPENGLES_DOC_EGLGRAYFILTER_H

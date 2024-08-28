@@ -79,6 +79,22 @@ static float
         1.0f, 1.0f,
 };
 
+static float
+        elg_gray_pos[] = {
+        -1.0f, -1.0f,
+        -1.0f, 1.0f,
+        1.0f, -1.0f,
+        1.0f, 1.0f,
+};
+
+static float
+        egl_gray_coordinate[] = {
+        0.0f, 0.0f,
+        0.0f, 1.0f,
+        1.0f, 0.0f,
+        1.0f, 1.0f,
+};
+
 GLuint CreateShader(GLenum shader_type, const char *source_code);
 
 GLuint CreateProgram(GLuint vertex_shader, GLuint fragment_shader);

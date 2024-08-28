@@ -4,11 +4,11 @@
 
 #include <jni.h>
 #include "EglCore.h"
-#include "GrayFilter.h"
+#include "EGLGrayFilter.h"
 #include <android/bitmap.h>
 
 EglCore *eglCore;
-GrayFilter *filter;
+EGLGrayFilter *filter;
 int image_width;
 int image_heigth;
 extern "C"
@@ -22,7 +22,7 @@ Java_com_rzm_opengles_1doc_egl_EGLBackgroundRender_init(JNIEnv *env, jobject thi
     EGLSurface surface = eglCore->createOffscreenSurface(width, height);
     eglCore->makeCurrent(surface);
     __android_log_print(ANDROID_LOG_INFO, "rzm", "initEgl success");
-    filter = new GrayFilter(env, asset);
+    filter = new EGLGrayFilter(env, asset);
     filter->init();
 }
 

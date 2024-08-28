@@ -2,21 +2,21 @@
 // Created by 任振铭 on 2024/8/28.
 //
 
-#include "GrayFilter.h"
+#include "EGLGrayFilter.h"
 #include "NativeAssetsLoader.h"
 #include "GLUtils.h"
 
 static NativeAssetsLoader *loader;
 
-GrayFilter::GrayFilter(JNIEnv *env, jobject asset) {
+EGLGrayFilter::EGLGrayFilter(JNIEnv *env, jobject asset) {
     loader = new NativeAssetsLoader(env, asset);
 }
 
-GrayFilter::~GrayFilter() {
+EGLGrayFilter::~EGLGrayFilter() {
 
 }
 
-void GrayFilter::init() {
+void EGLGrayFilter::init() {
     int file_size = 0;
     unsigned char *vertex_shader_code = loader->LoadFile("egl_gray_vertex.vs", file_size);
     unsigned char *fragment_shader_code = loader->LoadFile("egl_gray_fragment.fs", file_size);
@@ -27,13 +27,13 @@ void GrayFilter::init() {
     __android_log_print(ANDROID_LOG_INFO, "rzm", "init");
 }
 
-void GrayFilter::setBitmap(void *pixel, int width, int height, int format) {
+void EGLGrayFilter::setBitmap(void *pixel, int width, int height, int format) {
     texture = CreateTexture2D(pixel, width, height, GL_RGBA, GL_RGBA);
     __android_log_print(ANDROID_LOG_INFO, "rzm", "setBitmap texture = %d，format = %d,", texture,
                         format);
 }
 
-void GrayFilter::draw() {
+void EGLGrayFilter::draw() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glUseProgram(program);
     glActiveTexture(GL_TEXTURE0);
@@ -42,8 +42,8 @@ void GrayFilter::draw() {
 
     glEnableVertexAttribArray(positionLocation);
     glEnableVertexAttribArray(coordinateLocation);
-    glVertexAttribPointer(positionLocation, 2, GL_FLOAT, false, 0, texture_image_pos);
-    glVertexAttribPointer(coordinateLocation, 2, GL_FLOAT, false, 0, texture_image_coordinate);
+    glVertexAttribPointer(positionLocation, 2, GL_FLOAT, false, 0, elg_gray_pos);
+    glVertexAttribPointer(coordinateLocation, 2, GL_FLOAT, false, 0, egl_gray_coordinate);
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     glDisableVertexAttribArray(positionLocation);
     glDisableVertexAttribArray(coordinateLocation);
