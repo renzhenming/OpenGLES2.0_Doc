@@ -51,6 +51,8 @@ add_library( # Sets the name of the library.
         EglBackgroundRender.cpp
         EglCore.cpp
         EGLGrayFilter.cpp
+        FboRenderScheduler.cpp
+        FboRender.cpp
         # Provides a relative path to your source file(s).
         )
 

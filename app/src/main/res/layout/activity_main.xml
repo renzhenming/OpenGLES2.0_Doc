@@ -101,5 +101,12 @@
             android:onClick="onClick"
             android:text="EGL离屏渲染" />
 
+        <Button
+            android:id="@+id/fbo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="FBO离屏渲染" />
+
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

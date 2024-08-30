@@ -95,6 +95,20 @@ static float
         1.0f, 1.0f,
 };
 
+static float fbo_pos[] = {
+        -1.0f, -1.0f,
+        1.0f, -1.0f,
+        -1.0f, 1.0f,
+        1.0f, 1.0f,
+};
+
+static float fbo_coord[] = {
+        0.0, 1.0,
+        0.0, 0.0,
+        1.0, 1.0,
+        1.0, 0.0
+};
+
 GLuint CreateShader(GLenum shader_type, const char *source_code);
 
 GLuint CreateProgram(GLuint vertex_shader, GLuint fragment_shader);
