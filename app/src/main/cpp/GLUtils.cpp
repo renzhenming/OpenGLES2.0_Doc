@@ -100,6 +100,19 @@ GLuint CreateTexture2D(void *pixel, int width, int height, GLenum gpu_format, GL
     return texture;
 }
 
+GLuint CreateCompressedTexture2D(void *pixel, int file_size, int width, int height) {
+    GLuint texture;
+    glGenTextures(1, &texture);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+//    glCompressedTexImage2D(GL_TEXTURE_2D, 0, GL_ETC1_RGB8_OES, width, height, 0, file_size, pixel);
+    glBindTexture(GL_TEXTURE_2D, 0);
+    return texture;
+}
+
 void FlipImage(unsigned char *pixel, int width, int height, int channel_count) {
     int half_height = height / 2;
     for (int y = 0; y < half_height; ++y) {

@@ -53,6 +53,8 @@ add_library( # Sets the name of the library.
         EGLGrayFilter.cpp
         FboRenderScheduler.cpp
         FboRender.cpp
+        EtcRenderScheduler.cpp
+        EtcRender.cpp
         # Provides a relative path to your source file(s).
         )
 

@@ -59,6 +59,9 @@
             android:name=".simple.FboOutOfScreenDrawActivity"
             android:exported="false" />
         <activity
+            android:name=".simple.EtcCompressedTextureActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

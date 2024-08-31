@@ -14,6 +14,7 @@ import com.rzm.opengles_doc.simple.CoolTextureImageActivity;
 import com.rzm.opengles_doc.simple.CubeShapeActivity;
 import com.rzm.opengles_doc.simple.CubeTransformActivity;
 import com.rzm.opengles_doc.simple.EGLOutOfScreenDrawActivity;
+import com.rzm.opengles_doc.simple.EtcCompressedTextureActivity;
 import com.rzm.opengles_doc.simple.FboOutOfScreenDrawActivity;
 import com.rzm.opengles_doc.simple.GrayTextureImageActivity;
 import com.rzm.opengles_doc.simple.MagnifierTextureImageActivity;
@@ -66,6 +67,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             clazz = EGLOutOfScreenDrawActivity.class;
         } else if (id == R.id.fbo) {
             clazz = FboOutOfScreenDrawActivity.class;
+        } else if (id == R.id.etc) {
+            clazz = EtcCompressedTextureActivity.class;
         } else {
             clazz = TriangleShapeActivity.class;
         }

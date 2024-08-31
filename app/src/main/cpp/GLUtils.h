@@ -125,6 +125,8 @@ void SwapRGBAPixel(unsigned char *pixel, int src0, int src1);
 
 GLuint CreateTexture2D(void *pixel, int width, int height, GLenum gpu_format, GLenum cpu_format);
 
+GLuint CreateCompressedTexture2D(void *pixel, int file_size, int width, int height);
+
 GLuint
 CreateTextureFromFile(const char *path, unsigned char *filecontent, int file_size, int &image_width,
                       int &image_height);
