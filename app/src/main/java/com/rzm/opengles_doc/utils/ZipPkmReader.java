@@ -16,7 +16,6 @@ public class ZipPkmReader {
     private final String mPath;
     private ZipInputStream mZipStream;
     private AssetManager mManager;
-    private ZipEntry mZipEntry;
     private ByteBuffer headerBuffer;
 
     public ZipPkmReader(Context context, String path) throws IOException {
@@ -35,14 +34,14 @@ public class ZipPkmReader {
     private ETC1Util.ETC1Texture createTexture(InputStream input) throws IOException {
         byte[] ioBuffer = new byte[4096];
         if (input.read(ioBuffer, 0, ETC1.ETC_PKM_HEADER_SIZE) != ETC1.ETC_PKM_HEADER_SIZE) {
-            throw new IOException("Unable to read PKM file header.");
+            throw new IOException("read pkm file header fail.");
         }
         if (headerBuffer == null) {
             headerBuffer = ByteBuffer.allocateDirect(ETC1.ETC_PKM_HEADER_SIZE).order(ByteOrder.nativeOrder());
         }
         headerBuffer.put(ioBuffer, 0, ETC1.ETC_PKM_HEADER_SIZE).position(0);
         if (!ETC1.isValid(headerBuffer)) {
-            throw new IOException("Not a PKM file.");
+            throw new IOException("pkm format wrong.");
         }
         int width = ETC1.getWidth(headerBuffer);
         int height = ETC1.getHeight(headerBuffer);

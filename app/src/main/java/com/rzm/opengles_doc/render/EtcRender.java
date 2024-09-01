@@ -2,19 +2,12 @@ package com.rzm.opengles_doc.render;
 
 import android.content.Context;
 import android.content.res.AssetManager;
-import android.opengl.ETC1;
-import android.opengl.ETC1Util;
 import android.opengl.GLSurfaceView;
 import android.util.Log;
 
 import com.rzm.opengles_doc.utils.ZipPkmReader;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.util.zip.ZipInputStream;
-
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
@@ -51,6 +44,9 @@ public class EtcRender implements GLSurfaceView.Renderer {
         On_Native_SurfaceChanged(width, height);
     }
 
+    /**
+     * 不要动这个方法，此方法是提供给native层调用的
+     */
     public ZipPkmReader getReader() {
         return mReader;
     }
@@ -62,14 +58,6 @@ public class EtcRender implements GLSurfaceView.Renderer {
             Log.d("rzm", "onDrawFrame");
         }
         try {
-//            ETC1Util.ETC1Texture texture = mReader.getNextTexture();
-//            if (texture == null) {
-//                return;
-//            }
-//            ByteBuffer data = texture.getData();
-//            int remaining = data.remaining();
-//            int width = texture.getWidth();
-//            int height = texture.getHeight();
             long startTime = System.currentTimeMillis();
             On_Native_DrawFrame();
             long s = System.currentTimeMillis() - startTime;

@@ -12,6 +12,8 @@ class EtcRender {
 public:
     JavaVM *vm;
     jobject render_obj;
+    jobject reader_obj;
+    jmethodID getNextTextureMethodId;
     jmethodID getWidthMethodId;
     jmethodID getHeightMethodId;
     jmethodID getDataMethodId;
@@ -28,10 +30,6 @@ public:
     GLint alphaTextureLocation;
     GLuint texture;
     GLuint alphaTexture;
-    int texture_file_size = 0;
-    int alpha_texture_file_size = 0;
-    unsigned char *lbjn_0091_content;
-    unsigned char *lbjn_0091_alpha_content;
 
     glm::mat4 modelMatrix;
     glm::mat4 viewMatrix;

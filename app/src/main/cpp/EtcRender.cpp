@@ -10,6 +10,21 @@ EtcRender::EtcRender(JNIEnv *env, jobject obj, jobject asset) {
     render_obj = env->NewGlobalRef(obj);
     env->GetJavaVM(&vm);
     loader = new NativeAssetsLoader(env, asset);
+    jclass renderClass = env->GetObjectClass(render_obj);
+    jmethodID getReaderMethodId = env->GetMethodID(renderClass, "getReader",
+                                                   "()Lcom/rzm/opengles_doc/utils/ZipPkmReader;");
+    jobject reader = env->CallObjectMethod(render_obj, getReaderMethodId);
+    reader_obj = env->NewGlobalRef(reader);
+    jclass reader_class = env->GetObjectClass(reader_obj);
+    getNextTextureMethodId = env->GetMethodID(reader_class, "getNextTexture",
+                                              "()Landroid/opengl/ETC1Util$ETC1Texture;");
+    jclass byteBuffer_class = env->FindClass("java/nio/ByteBuffer");
+    remainingMethodId = env->GetMethodID(byteBuffer_class, "remaining", "()I");
+
+    jclass etc_class = env->FindClass("android/opengl/ETC1Util$ETC1Texture");
+    getWidthMethodId = env->GetMethodID(etc_class, "getWidth", "()I");
+    getHeightMethodId = env->GetMethodID(etc_class, "getHeight", "()I");
+    getDataMethodId = env->GetMethodID(etc_class, "getData", "()Ljava/nio/ByteBuffer;");
 }
 
 EtcRender::~EtcRender() {
@@ -32,6 +47,7 @@ void EtcRender::CreateSurface() {
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
     int file_size;
     texture = initPkmTexture();
+    alphaTexture = initPkmTexture();
     unsigned char *vertex_shader_code = loader->LoadFile("pkm_vertex_shader.vs", file_size);
     unsigned char *fragment_shader_code = loader->LoadFile("pkm_fragment_shader.fs", file_size);
     program = CreateProgram(vertex_shader_code, fragment_shader_code);
@@ -68,48 +84,24 @@ void EtcRender::loadNextTextureInfo(jbyte *&texture_buffer, int &texture_width, 
         __android_log_print(ANDROID_LOG_INFO, "rzm", "AttachCurrentThread fail");
         return;
     }
-    jclass renderClass = env->GetObjectClass(render_obj);
-    jmethodID getReaderMethodId = env->GetMethodID(renderClass, "getReader",
-                                                   "()Lcom/rzm/opengles_doc/utils/ZipPkmReader;");
-    jobject reader_obj = env->CallObjectMethod(render_obj, getReaderMethodId);
 
-    if (reader_obj == nullptr){
-        __android_log_print(ANDROID_LOG_INFO, "rzm", "reader_obj null");
+    jobject pkm_texture_obj = env->CallObjectMethod(reader_obj, getNextTextureMethodId);
+    if (pkm_texture_obj == nullptr) {
+        __android_log_print(ANDROID_LOG_INFO, "rzm", "pkm_texture_obj null");
         return;
     }
-    jclass reader_class = env->GetObjectClass(reader_obj);
-    jmethodID getNextTextureMethodId = env->GetMethodID(reader_class, "getNextTexture",
-                                                        "()Landroid/opengl/ETC1Util$ETC1Texture;");
-    jobject eTC1Texture_Obj = env->CallObjectMethod(reader_obj, getNextTextureMethodId);
-
-    if (eTC1Texture_Obj == nullptr){
-        __android_log_print(ANDROID_LOG_INFO, "rzm", "eTC1Texture_Obj null");
-        return;
-    }
-    jclass etc_class = env->GetObjectClass(eTC1Texture_Obj);
-    getWidthMethodId = env->GetMethodID(etc_class, "getWidth", "()I");
-    getHeightMethodId = env->GetMethodID(etc_class, "getHeight", "()I");
-    getDataMethodId = env->GetMethodID(etc_class, "getData", "()Ljava/nio/ByteBuffer;");
-
-    jclass byteBuffer_class = env->FindClass("java/nio/ByteBuffer");
-    remainingMethodId = env->GetMethodID(byteBuffer_class, "remaining", "()I");
-
-    texture_width = env->CallIntMethod(eTC1Texture_Obj, getWidthMethodId);
-    texture_height = env->CallIntMethod(eTC1Texture_Obj, getHeightMethodId);
-    jobject texture_data = env->CallObjectMethod(eTC1Texture_Obj, getDataMethodId);
+    texture_width = env->CallIntMethod(pkm_texture_obj, getWidthMethodId);
+    texture_height = env->CallIntMethod(pkm_texture_obj, getHeightMethodId);
+    jobject texture_data = env->CallObjectMethod(pkm_texture_obj, getDataMethodId);
     texture_buffer = static_cast<jbyte *>(env->GetDirectBufferAddress(texture_data));
     texture_size = env->CallIntMethod(texture_data, remainingMethodId);
     __android_log_print(ANDROID_LOG_INFO, "rzm", "texture_width=%d", texture_width);
     __android_log_print(ANDROID_LOG_INFO, "rzm", "texture_height=%d", texture_height);
     __android_log_print(ANDROID_LOG_INFO, "rzm", "texture_size=%d", texture_size);
-//    if (vm->DetachCurrentThread() != JNI_OK) {
-//        __android_log_print(ANDROID_LOG_INFO, "rzm", "DetachCurrentThread fail");
-//        return;
-//    }
 }
 
 void EtcRender::DrawFrame() {
-    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glUseProgram(program);
     glUniformMatrix4fv(modelMatrixLocation, 1, GL_FALSE, glm::value_ptr(modelMatrix));
@@ -122,22 +114,27 @@ void EtcRender::DrawFrame() {
     int texture_size;
     loadNextTextureInfo(texture_buffer, texture_width, texture_height, texture_size);
 
-    if (texture_buffer == nullptr){
+    if (texture_buffer == nullptr) {
         return;
     }
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, texture);
-    glCompressedTexImage2D(GL_TEXTURE_2D, 0, GL_ETC1_RGB8_OES, texture_width, texture_height, 0, texture_size, texture_buffer);
+    glCompressedTexImage2D(GL_TEXTURE_2D, 0, GL_ETC1_RGB8_OES, texture_width, texture_height, 0,
+                           texture_size, texture_buffer);
     glUniform1i(textureLocation, 0);
 
-//    loadNextTextureInfo(texture_buffer, texture_width, texture_height, texture_size);
-//    if (texture_buffer == nullptr){
-//        return;
-//    }
-//    glActiveTexture(GL_TEXTURE1);
-//    glBindTexture(GL_TEXTURE_2D, alphaTexture);
-//    glCompressedTexImage2D(GL_TEXTURE_2D, 0, GL_ETC1_RGB8_OES, texture_width, texture_height, 0, texture_size, texture_buffer);
-//    glUniform1i(alphaTextureLocation, 1);
+    jbyte *texture_buffer2;
+    int texture_width2;
+    int texture_height2;
+    int texture_size2;
+    loadNextTextureInfo(texture_buffer2, texture_width2, texture_height2, texture_size2);
+    if (texture_buffer2 == nullptr){
+        return;
+    }
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_2D, alphaTexture);
+    glCompressedTexImage2D(GL_TEXTURE_2D, 0, GL_ETC1_RGB8_OES, texture_width2, texture_height2, 0, texture_size2, texture_buffer2);
+    glUniform1i(alphaTextureLocation, 1);
 
     glEnableVertexAttribArray(positionLocation);
     glEnableVertexAttribArray(coordinateLocation);
