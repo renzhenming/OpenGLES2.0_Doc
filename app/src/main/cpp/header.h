@@ -21,6 +21,7 @@
 #include <EGL/eglext.h>
 
 #include "android/bitmap.h"
+#include "GLUtils.h"
 
 
 #endif //OPENGLES_DOC_HEADER_H
