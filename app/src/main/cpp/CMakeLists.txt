@@ -56,7 +56,6 @@ add_library( # Sets the name of the library.
         EtcRenderScheduler.cpp
         EtcRender.cpp
         TextureRender.cpp
-        BlendColorRenderScheduler.cpp
         AbsGlRender.cpp
         # Provides a relative path to your source file(s).
         )

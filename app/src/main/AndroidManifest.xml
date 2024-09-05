@@ -62,9 +62,6 @@
             android:name=".simple.EtcCompressedTextureActivity"
             android:exported="false" />
         <activity
-            android:name=".simple.BlendColorActivity"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

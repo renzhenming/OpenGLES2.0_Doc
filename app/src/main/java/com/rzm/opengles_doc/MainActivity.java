@@ -8,7 +8,6 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
-import com.rzm.opengles_doc.simple.BlendColorActivity;
 import com.rzm.opengles_doc.simple.BlurTextureImageActivity;
 import com.rzm.opengles_doc.simple.CameraActivity;
 import com.rzm.opengles_doc.simple.CoolTextureImageActivity;
@@ -70,9 +69,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             clazz = FboOutOfScreenDrawActivity.class;
         } else if (id == R.id.etc) {
             clazz = EtcCompressedTextureActivity.class;
-        } else if (id == R.id.blend) {
-            clazz = BlendColorActivity.class;
-        } else {
+        }  else {
             clazz = TriangleShapeActivity.class;
         }
         startActivity(new Intent(this, clazz));

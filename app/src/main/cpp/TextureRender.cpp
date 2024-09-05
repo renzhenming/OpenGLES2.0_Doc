@@ -12,8 +12,8 @@ TextureRender::TextureRender(JNIEnv *env, jobject assets) {
 
 GLuint TextureRender::CreateTexture() {
     int file_size;
-    unsigned char *image_content = loader->LoadFile("cat.png", file_size);
-    GLuint texture = CreateTextureFromFile("cat.png", image_content, file_size, image_width,
+    unsigned char *image_content = loader->LoadFile("cat.jpg", file_size);
+    GLuint texture = CreateTextureFromFile("cat.jpg", image_content, file_size, image_width,
                                            image_height);
     return texture;
 }
