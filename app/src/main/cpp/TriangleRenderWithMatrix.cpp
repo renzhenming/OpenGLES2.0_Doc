@@ -18,6 +18,12 @@ void TriangleRenderWithMatrix::CreateSurface() {
     unsigned char *fragment_shader_code = loader->LoadFile("simple_fragment_shader_matrix.fs",
                                                            file_size);
     program = CreateProgram(vertex_shader_code, fragment_shader_code);
+    positionLocation = glGetAttribLocation(program, "vPosition");
+    modelMatrixLocation = glGetUniformLocation(program, "U_ModelMatrix");
+    viewMatrixLocation = glGetUniformLocation(program, "U_ViewMatrix");
+    projectionMatrixLocation = glGetUniformLocation(program, "U_ProjectionMatrix");
+    colorLocation = glGetAttribLocation(program, "aColor");
+
     modelMatrix = glm::translate(0.0f, 0.0f, 0.0f);
     viewMatrix = glm::lookAt(glm::vec3(0.0f, 0.0f, 7.0f), glm::vec3(0.0, 0.0, 0.0f),
                              glm::vec3(0.0, 1.0f, 0.0f));
@@ -25,28 +31,32 @@ void TriangleRenderWithMatrix::CreateSurface() {
 
 void TriangleRenderWithMatrix::SurfaceChanged(int width, int height) {
     glViewport(0, 0, width, height);
-    float ratio = (float) width / height;
-    projectionMatrix = glm::frustum(-ratio, ratio, -1.0f, 1.0f, 3.0f, 7.0f);
+    float ratio = width > height ? (float) width / height : (float) height / width;
+    //以较窄的一边作为1
+    if (width > height) {
+        //透视投影。通过将场景中的物体投影到视锥体的近平面上，可以实现透视效果，使得远处的物体看起来比近处的物体小。
+        projectionMatrix = glm::frustum(-ratio, ratio, -1.0f, 1.0f, 3.0f, 7.0f);
+    } else {
+        projectionMatrix = glm::frustum(-1.0f, 1.0f, -ratio, ratio, 3.0f, 7.0f);
+    }
 }
 
 void TriangleRenderWithMatrix::DrawFrame() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
     glUseProgram(program);
-    int positionLocation = glGetAttribLocation(program, "vPosition");
+
     glEnableVertexAttribArray(positionLocation);
     glVertexAttribPointer(positionLocation, 3, GL_FLOAT, false, 0, vertex_pos);
-
-    GLint modelMatrixLocation = glGetUniformLocation(program, "U_ModelMatrix");
-    glUniformMatrix4fv(modelMatrixLocation, 1, GL_FALSE, glm::value_ptr(modelMatrix));
-    GLint viewMatrixLocation = glGetUniformLocation(program, "U_ViewMatrix");
-    glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, glm::value_ptr(viewMatrix));
-    GLint projectionMatrixLocation = glGetUniformLocation(program, "U_ProjectionMatrix");
-    glUniformMatrix4fv(projectionMatrixLocation, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
-    GLint colorLocation = glGetAttribLocation(program, "aColor");
     glVertexAttribPointer(colorLocation, 4, GL_FLOAT, false, 0, color);
     glEnableVertexAttribArray(colorLocation);
 
-    glDrawArrays(GL_TRIANGLES, 0, 3);
+    glUniformMatrix4fv(modelMatrixLocation, 1, GL_FALSE, glm::value_ptr(modelMatrix));
+    glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, glm::value_ptr(viewMatrix));
+    glUniformMatrix4fv(projectionMatrixLocation, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
+
+    //GL_TRIANGLES: 每个三角形都由三个顶点明确指定，没有顶点之间的共享关系
+    //GL_TRIANGLE_STRIP: 一系列相连的三角形组成一个条带。第一个三角形由前三个顶点定义，后续的每个三角形通过复用前一个三角形的两个顶点并添加一个新顶点来形成。
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, 3);
     glDisableVertexAttribArray(positionLocation);
 }
