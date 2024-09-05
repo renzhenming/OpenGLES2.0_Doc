@@ -13,6 +13,8 @@ class TriangleRender {
 private:
     GLuint program;
     NativeAssetsLoader *loader;
+    int positionLocation;
+    int colorLocation;
 public:
     TriangleRender(JNIEnv *env, jobject asset);
 
