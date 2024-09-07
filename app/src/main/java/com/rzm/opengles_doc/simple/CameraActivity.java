@@ -6,18 +6,20 @@ import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.rzm.opengles_doc.CameraGlSurfaceView;
+import com.rzm.opengles_doc.MyGlSurfaceView;
 import com.rzm.opengles_doc.render.CameraRender;
 
 public class CameraActivity extends AppCompatActivity {
 
-    private CameraGlSurfaceView surfaceView;
+    private MyGlSurfaceView surfaceView;
+    private CameraRender render;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        CameraRender render = new CameraRender(this);
-        surfaceView = new CameraGlSurfaceView(this, render);
+        render = new CameraRender(this);
+        surfaceView = new MyGlSurfaceView(this, render);
+        render.bindSurfaceView(surfaceView);
         setContentView(surfaceView);
     }
 
@@ -29,7 +31,7 @@ public class CameraActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        surfaceView.switchCamera();
+        render.switchCamera();
         return super.onOptionsItemSelected(item);
     }
 }
