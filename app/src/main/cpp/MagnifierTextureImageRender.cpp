@@ -43,7 +43,7 @@ void MagnifierTextureImageRender::CreateSurface() {
 
 void MagnifierTextureImageRender::SurfaceChanged(int width, int height) {
     glViewport(0, 0, width, height);
-    ratio = (width > height) ? width / (float) height : height / (float) width;
+    float ratio = (width > height) ? width / (float) height : height / (float) width;
     if (width > height) {
         projectionMatrix = glm::ortho(-ratio, ratio, -1.0f, 1.0f, 3.0f, 5.0f);
     } else {
@@ -61,8 +61,6 @@ void MagnifierTextureImageRender::DrawFrame() {
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, texture);
     glUniform1i(textureLocation, 0);
-
-    glUniform1f(ratioLocation, ratio);
 
     glEnableVertexAttribArray(positionLocation);
     glEnableVertexAttribArray(coordinateLocation);

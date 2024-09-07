@@ -8,5 +8,6 @@ varying vec4 gPosition;
 void main(){
     gl_Position = U_ProjectionMatrix*U_ViewMatrix*U_ModelMatrix*vPosition;
     aCoordinate = vCoordinate;
-    gPosition = U_ProjectionMatrix*U_ViewMatrix*U_ModelMatrix*vPosition;
+    //gPosition = U_ProjectionMatrix*U_ViewMatrix*U_ModelMatrix*vPosition;
+    gPosition = vPosition;
 }
