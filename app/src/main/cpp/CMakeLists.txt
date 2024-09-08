@@ -57,6 +57,8 @@ add_library( # Sets the name of the library.
         EtcRender.cpp
         TextureRender.cpp
         AbsGlRender.cpp
+        YUV420RenderScheduler.cpp
+        YUV420Render.cpp
         # Provides a relative path to your source file(s).
         )
 

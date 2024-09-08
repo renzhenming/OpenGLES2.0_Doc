@@ -23,6 +23,7 @@ import com.rzm.opengles_doc.simple.TextureImageActivity;
 import com.rzm.opengles_doc.simple.TriangleShapeActivity;
 import com.rzm.opengles_doc.simple.TriangleShapeActivity_with_Matrix;
 import com.rzm.opengles_doc.simple.WarmTextureImageActivity;
+import com.rzm.opengles_doc.simple.YUV420RenderActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -69,7 +70,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             clazz = FboOutOfScreenDrawActivity.class;
         } else if (id == R.id.etc) {
             clazz = EtcCompressedTextureActivity.class;
-        }  else {
+        } else if (id == R.id.yuv) {
+            clazz = YUV420RenderActivity.class;
+        } else {
             clazz = TriangleShapeActivity.class;
         }
         startActivity(new Intent(this, clazz));
