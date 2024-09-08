@@ -13,54 +13,57 @@ project("opengles_doc")
 # or SHARED, and provides the relative paths to its source code.
 # You can define multiple libraries, and CMake builds them for you.
 # Gradle automatically packages shared libraries with your APK.
+# 遍历当前目录及其子目录下的所有 .cpp .c 文件，并将它们的路径存储在 SOURCE_FILES 变量中
+file(GLOB GLES_SOURCE_FILE *.cpp *.c)
 
 add_library( # Sets the name of the library.
         opengles
 
         # Sets the library as a shared library.
         SHARED
-        header.cpp
-        TriangleRenderScheduler.cpp
-        TriangleRender.cpp
-        NativeAssetsLoader.cpp
-        GLUtils.cpp
-        TriangleRenderSchedulerWithMatrix.cpp
-        TriangleRenderWithMatrix.cpp
-        SquareRenderScheduler.cpp
-        SquareRender.cpp
-        CubeRenderScheduler.cpp
-        CubeRender.cpp
-        TextureImageRenderScheduler.cpp
-        TextureImageRender.cpp
-        stb_image_aug.c
-        GrayTextureImageRenderScheduler.cpp
-        GrayTextureImageRender.cpp
-        CoolTextureImageRenderScheduler.cpp
-        CoolTextureImageRender.cpp
-        WarmTextureImageRenderScheduler.cpp
-        WarmTextureImageRender.cpp
-        MagnifierTextureImageRenderScheduler.cpp
-        MagnifierTextureImageRender.cpp
-        BlurTextureImageRenderScheduler.cpp
-        BlurTextureImageRender.cpp
-        CubeTransformRenderScheduler.cpp
-        CubeTransformRender.cpp
-        Cube.cpp
-        CameraRenderScheduler.cpp
-        CameraRender.cpp
-        EglBackgroundRender.cpp
-        EglCore.cpp
-        EGLGrayFilter.cpp
-        FboRenderScheduler.cpp
-        FboRender.cpp
-        EtcRenderScheduler.cpp
-        EtcRender.cpp
-        TextureRender.cpp
-        AbsGlRender.cpp
-        YUV420RenderScheduler.cpp
-        YUV420Render.cpp
-        TriangleRenderSchedulerVBO_EBO.cpp
-        TriangleRenderVBO_EBO.cpp
+        ${GLES_SOURCE_FILE}
+#        header.cpp
+#        TriangleRenderScheduler.cpp
+#        TriangleRender.cpp
+#        NativeAssetsLoader.cpp
+#        GLUtils.cpp
+#        TriangleRenderSchedulerWithMatrix.cpp
+#        TriangleRenderWithMatrix.cpp
+#        SquareRenderScheduler.cpp
+#        SquareRender.cpp
+#        CubeRenderScheduler.cpp
+#        CubeRender.cpp
+#        TextureImageRenderScheduler.cpp
+#        TextureImageRender.cpp
+#        stb_image_aug.c
+#        GrayTextureImageRenderScheduler.cpp
+#        GrayTextureImageRender.cpp
+#        CoolTextureImageRenderScheduler.cpp
+#        CoolTextureImageRender.cpp
+#        WarmTextureImageRenderScheduler.cpp
+#        WarmTextureImageRender.cpp
+#        MagnifierTextureImageRenderScheduler.cpp
+#        MagnifierTextureImageRender.cpp
+#        BlurTextureImageRenderScheduler.cpp
+#        BlurTextureImageRender.cpp
+#        CubeTransformRenderScheduler.cpp
+#        CubeTransformRender.cpp
+#        Cube.cpp
+#        CameraRenderScheduler.cpp
+#        CameraRender.cpp
+#        EglBackgroundRender.cpp
+#        EglCore.cpp
+#        EGLGrayFilter.cpp
+#        FboRenderScheduler.cpp
+#        FboRender.cpp
+#        EtcRenderScheduler.cpp
+#        EtcRender.cpp
+#        TextureRender.cpp
+#        AbsGlRender.cpp
+#        YUV420RenderScheduler.cpp
+#        YUV420Render.cpp
+#        TriangleRenderSchedulerVBO_EBO.cpp
+#        TriangleRenderVBO_EBO.cpp
         # Provides a relative path to your source file(s).
         )
 
