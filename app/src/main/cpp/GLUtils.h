@@ -44,6 +44,12 @@ static float vertex_pos[] = {
         0.5f, -0.5f, 0.0f  // bottom right
 };
 
+static float vertex_color_pos[] = {
+        0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,
+        -0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
+        0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f
+};
+
 static float color_pos[] = {1.0f, 1.0f, 1.0f, 1.0f};
 
 static float color[] = {

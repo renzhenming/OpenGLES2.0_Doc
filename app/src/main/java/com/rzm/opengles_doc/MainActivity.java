@@ -8,6 +8,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.rzm.opengles_doc.render.TriangleRenderWithMatrix_VBO_EBO;
 import com.rzm.opengles_doc.simple.BlurTextureImageActivity;
 import com.rzm.opengles_doc.simple.CameraActivity;
 import com.rzm.opengles_doc.simple.CoolTextureImageActivity;
@@ -21,6 +22,7 @@ import com.rzm.opengles_doc.simple.MagnifierTextureImageActivity;
 import com.rzm.opengles_doc.simple.SquareShapeActivity;
 import com.rzm.opengles_doc.simple.TextureImageActivity;
 import com.rzm.opengles_doc.simple.TriangleShapeActivity;
+import com.rzm.opengles_doc.simple.TriangleShapeActivity_VBO_EBO;
 import com.rzm.opengles_doc.simple.TriangleShapeActivity_with_Matrix;
 import com.rzm.opengles_doc.simple.WarmTextureImageActivity;
 import com.rzm.opengles_doc.simple.YUV420RenderActivity;
@@ -44,6 +46,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Class clazz;
         if (id == R.id.btDraw2) {
             clazz = TriangleShapeActivity_with_Matrix.class;
+        } else if (id == R.id.vbo) {
+            clazz = TriangleShapeActivity_VBO_EBO.class;
         } else if (id == R.id.square) {
             clazz = SquareShapeActivity.class;
         } else if (id == R.id.cube) {

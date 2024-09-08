@@ -59,6 +59,8 @@ add_library( # Sets the name of the library.
         AbsGlRender.cpp
         YUV420RenderScheduler.cpp
         YUV420Render.cpp
+        TriangleRenderSchedulerVBO_EBO.cpp
+        TriangleRenderVBO_EBO.cpp
         # Provides a relative path to your source file(s).
         )
 
