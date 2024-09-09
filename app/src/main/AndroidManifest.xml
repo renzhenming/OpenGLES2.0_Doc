@@ -26,6 +26,9 @@
             android:name=".simple.TriangleShapeActivity_VBO_EBO"
             android:exported="false" />
         <activity
+            android:name=".simple.TriangleShapeActivity_VAO"
+            android:exported="false" />
+        <activity
             android:name=".simple.SquareShapeActivity"
             android:exported="false" />
         <activity

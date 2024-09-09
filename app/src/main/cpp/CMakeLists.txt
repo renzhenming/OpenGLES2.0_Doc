@@ -88,7 +88,9 @@ target_link_libraries( # Specifies the target library.
         opengles
         android
         jnigraphics
-        GLESv2
+#        GLESv2
+        #v3版本兼容v2，所以链接v3既能保证使用v2的api又能同时使用v3的api
+        GLESv3
         EGL
         # Links the target library to the log library
         # included in the NDK.

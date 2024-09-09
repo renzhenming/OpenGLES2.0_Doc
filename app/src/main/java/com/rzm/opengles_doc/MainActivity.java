@@ -22,6 +22,7 @@ import com.rzm.opengles_doc.simple.MagnifierTextureImageActivity;
 import com.rzm.opengles_doc.simple.SquareShapeActivity;
 import com.rzm.opengles_doc.simple.TextureImageActivity;
 import com.rzm.opengles_doc.simple.TriangleShapeActivity;
+import com.rzm.opengles_doc.simple.TriangleShapeActivity_VAO;
 import com.rzm.opengles_doc.simple.TriangleShapeActivity_VBO_EBO;
 import com.rzm.opengles_doc.simple.TriangleShapeActivity_with_Matrix;
 import com.rzm.opengles_doc.simple.WarmTextureImageActivity;
@@ -48,6 +49,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             clazz = TriangleShapeActivity_with_Matrix.class;
         } else if (id == R.id.vbo) {
             clazz = TriangleShapeActivity_VBO_EBO.class;
+        } else if (id == R.id.vao) {
+            clazz = TriangleShapeActivity_VAO.class;
         } else if (id == R.id.square) {
             clazz = SquareShapeActivity.class;
         } else if (id == R.id.cube) {
