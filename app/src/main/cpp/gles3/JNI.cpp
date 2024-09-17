@@ -4,6 +4,7 @@
 
 #include <jni.h>
 #include "header.h"
+#include "RenderManager.h"
 
 #define NATIVE_RENDER_CLASS "com/rzm/opengles_doc/gles3/NativeRender"
 
@@ -14,35 +15,45 @@ extern "C" {
 
 JNIEXPORT void JNICALL Init(JNIEnv *env, jobject obj) {
     __android_log_print(ANDROID_LOG_INFO, "rzm", "JNI Init");
+    RenderManager::Get();
 }
 
 JNIEXPORT void JNICALL Destroy(JNIEnv *env, jobject obj) {
     __android_log_print(ANDROID_LOG_INFO, "rzm", "JNI Destroy");
+    RenderManager::Destroy();
 }
 
 JNIEXPORT void JNICALL SetRenderType(JNIEnv *env, jobject obj, jint renderType) {
     __android_log_print(ANDROID_LOG_INFO, "rzm", "JNI SetRenderType");
+    RenderManager::Get()->SetRenderType(renderType);
 }
 
-JNIEXPORT void JNICALL UpdateMatrix(JNIEnv *env, jobject obj, jint renderType) {
+JNIEXPORT void JNICALL
+UpdateMatrix(JNIEnv *env, jobject obj, jfloat rotateX, jfloat rotateY, jfloat scaleX,
+             jfloat scaleY) {
     __android_log_print(ANDROID_LOG_INFO, "rzm", "JNI UpdateMatrix");
+    RenderManager::Get()->UpdateMatrix(rotateX, rotateY, scaleX, scaleY);
 }
 
 JNIEXPORT void JNICALL
 SetImage(JNIEnv *env, jobject obj, jint format, jint width, jint height, jbyteArray image_data) {
     __android_log_print(ANDROID_LOG_INFO, "rzm", "JNI SetImage");
+    RenderManager::Get()->SetImage(format, width, height, nullptr);
 }
 
-JNIEXPORT void JNICALL OnSurfaceCreated(JNIEnv *env, jobject obj, jint renderType) {
+JNIEXPORT void JNICALL OnSurfaceCreated(JNIEnv *env, jobject obj) {
     __android_log_print(ANDROID_LOG_INFO, "rzm", "JNI OnSurfaceCreated");
+    RenderManager::Get()->OnSurfaceCreated();
 }
 
 JNIEXPORT void JNICALL OnSurfaceChanged(JNIEnv *env, jobject obj, jint width, jint height) {
     __android_log_print(ANDROID_LOG_INFO, "rzm", "JNI OnSurfaceChanged");
+    RenderManager::Get()->OnSurfaceChanged(width, height);
 }
 
 JNIEXPORT void JNICALL OnDrawFrame(JNIEnv *env, jobject obj, jint renderType) {
     __android_log_print(ANDROID_LOG_INFO, "rzm", "JNI OnDrawFrame");
+    RenderManager::Get()->OnSurfaceCreated();
 }
 
 #ifdef __cplusplus

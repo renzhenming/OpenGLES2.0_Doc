@@ -1,0 +1,37 @@
+//
+// Created by 任振铭 on 2024/9/18.
+//
+
+#ifndef OPENGLES_DOC_RENDERMANAGER_H
+#define OPENGLES_DOC_RENDERMANAGER_H
+
+
+class RenderManager {
+
+protected:
+    static RenderManager *render_manager;
+
+    RenderManager();
+
+    virtual ~RenderManager();
+
+public:
+    void SetRenderType(int renderType);
+
+    void UpdateMatrix(float rotateX, float rotateY, float scaleX, float scaleY);
+
+    void SetImage(int format, int width, int height, unsigned char *image_data);
+
+    void OnSurfaceCreated();
+
+    void OnSurfaceChanged(int width, int height);
+
+    void OnDrawFrame();
+
+    static RenderManager *Get();
+
+    static void Destroy();
+};
+
+
+#endif //OPENGLES_DOC_RENDERMANAGER_H
