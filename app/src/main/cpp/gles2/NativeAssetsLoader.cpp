@@ -3,7 +3,7 @@
 //
 
 #include "NativeAssetsLoader.h"
-#include "header.h"
+#include "../header.h"
 
 static AAssetManager *sAssetManager;
 

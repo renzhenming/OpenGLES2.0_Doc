@@ -5,7 +5,7 @@
 //
 
 #include "SquareRender.h"
-#include "header.h"
+#include "../header.h"
 #include "NativeAssetsLoader.h"
 #include "TextureImageRender.h"
 

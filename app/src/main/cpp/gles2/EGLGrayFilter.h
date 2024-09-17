@@ -5,7 +5,7 @@
 #ifndef OPENGLES_DOC_EGLGRAYFILTER_H
 #define OPENGLES_DOC_EGLGRAYFILTER_H
 
-#include "header.h"
+#include "../header.h"
 
 class EGLGrayFilter {
 public:

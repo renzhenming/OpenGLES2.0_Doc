@@ -5,7 +5,7 @@
 #ifndef OPENGLES_DOC_ETCRENDER_H
 #define OPENGLES_DOC_ETCRENDER_H
 
-#include "header.h"
+#include "../header.h"
 #include "NativeAssetsLoader.h"
 
 class EtcRender {

@@ -5,7 +5,7 @@
 #ifndef OPENGLES_DOC_FBORENDER_H
 #define OPENGLES_DOC_FBORENDER_H
 
-#include "header.h"
+#include "../header.h"
 
 class FboRender {
 public:

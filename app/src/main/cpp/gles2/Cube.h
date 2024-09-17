@@ -5,7 +5,7 @@
 #ifndef OPENGLES_DOC_CUBE_H
 #define OPENGLES_DOC_CUBE_H
 
-#include "header.h"
+#include "../header.h"
 #include "NativeAssetsLoader.h"
 #include "GLUtils.h"
 

@@ -18,8 +18,13 @@ file(GLOB GLES_SOURCE_FILE
         ${CMAKE_CURRENT_SOURCE_DIR}/gles2/*.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/gles2/*.c)
 
+file(GLOB GLES3_SOURCE_FILE
+        ${CMAKE_CURRENT_SOURCE_DIR}/gles3/*.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/gles3/*.c)
+
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/gles2)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/gles3)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 add_library(
         # Sets the name of the library.
@@ -28,7 +33,8 @@ add_library(
         SHARED
         # Provides a relative path to your source file(s).
         ${GLES_SOURCE_FILE}
-        )
+        ${GLES3_SOURCE_FILE}
+)
 
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by

@@ -4,7 +4,7 @@
 #include "TriangleRenderVAO.h"
 #include "NativeAssetsLoader.h"
 #include "GLUtils.h"
-#include "header.h"
+#include "../header.h"
 
 TriangleRenderVAO::TriangleRenderVAO(JNIEnv *env, jobject asset) {
     loader = new NativeAssetsLoader(env, asset);

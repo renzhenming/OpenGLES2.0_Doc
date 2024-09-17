@@ -5,7 +5,7 @@
 //
 
 #include "TriangleRenderVAO.h"
-#include "header.h"
+#include "../header.h"
 #include "NativeAssetsLoader.h"
 
 static TriangleRenderVAO *render;

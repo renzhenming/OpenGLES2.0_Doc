@@ -6,7 +6,7 @@
 #define OPENGLES_DOC_TRIANGLERENDER_H
 
 #include "jni.h"
-#include "header.h"
+#include "../header.h"
 #include "NativeAssetsLoader.h"
 
 class TriangleRenderWithMatrix {

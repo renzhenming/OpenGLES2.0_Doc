@@ -4,7 +4,7 @@
 #include "SquareRender.h"
 #include "NativeAssetsLoader.h"
 #include "GLUtils.h"
-#include "header.h"
+#include "../header.h"
 
 SquareRender::SquareRender(JNIEnv *env, jobject asset) {
     loader = new NativeAssetsLoader(env, asset);

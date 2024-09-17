@@ -4,7 +4,7 @@
 #include "TriangleRenderWithMatrix.h"
 #include "NativeAssetsLoader.h"
 #include "GLUtils.h"
-#include "header.h"
+#include "../header.h"
 
 TriangleRenderWithMatrix::TriangleRenderWithMatrix(JNIEnv *env, jobject asset) {
     loader = new NativeAssetsLoader(env, asset);

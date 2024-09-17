@@ -4,7 +4,7 @@
 
 #ifndef OPENGLES_DOC_GRAYTEXTUREIMAGERENDER_H
 #define OPENGLES_DOC_GRAYTEXTUREIMAGERENDER_H
-#include "header.h"
+#include "../header.h"
 #include "GLUtils.h"
 #include "NativeAssetsLoader.h"
 

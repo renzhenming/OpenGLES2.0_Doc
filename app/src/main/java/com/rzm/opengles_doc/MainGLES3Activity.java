@@ -1,27 +1,85 @@
 package com.rzm.opengles_doc;
 
-import android.Manifest;
+import static android.opengl.GLSurfaceView.RENDERMODE_WHEN_DIRTY;
+
+import android.app.AlertDialog;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-public class MainGLES3Activity extends AppCompatActivity implements View.OnClickListener {
+import com.rzm.opengles_doc.gles3.GLViewAdapter;
+import com.rzm.opengles_doc.gles3.JavaGLRender;
 
-    static {
-        System.loadLibrary("opengles");
-    }
+import java.util.Arrays;
+
+public class MainGLES3Activity extends AppCompatActivity implements GLViewAdapter.OnItemClickListener {
+
+    private ViewGroup mRootView;
+    private MyGlSurfaceView mGLSurfaceView;
+    private JavaGLRender mGLRender;
+    private static final String[] ITEM_TITLES = {"绘制三角形"};
+    private AlertDialog mRenderDialog;
+    private GLViewAdapter mRenderAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gles3_main);
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+        mRootView = (ViewGroup) findViewById(R.id.rootView);
+        mGLRender = new JavaGLRender();
     }
 
     @Override
-    public void onClick(View view) {
-        int id = view.getId();
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.menu_item) {
+            showGLSampleDialog();
+        }
+        return true;
+    }
+
+    private void showGLSampleDialog() {
+        mRenderDialog = new AlertDialog.Builder(this).create();
+        LayoutInflater inflater = LayoutInflater.from(this);
+        final View rootView = inflater.inflate(R.layout.gles3_list, null);
+        final RecyclerView listView = rootView.findViewById(R.id.list_view);
+        mRenderAdapter = new GLViewAdapter(Arrays.asList(ITEM_TITLES));
+        mRenderAdapter.setSelectIndex(0);
+        mRenderAdapter.setOnItemClickListener(this);
+        LinearLayoutManager manager = new LinearLayoutManager(this);
+        manager.setOrientation(LinearLayoutManager.VERTICAL);
+        listView.setLayoutManager(manager);
+        listView.setAdapter(mRenderAdapter);
+        mRenderDialog.show();
+        mRenderDialog.setContentView(rootView);
+    }
+
+    public void onItemClick(View view, int position) {
+        mRootView.removeView(mGLSurfaceView);
+        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        mGLSurfaceView = new MyGlSurfaceView(MainGLES3Activity.this, mGLRender);
+        mRootView.addView(mGLSurfaceView, params);
+        int selectIndex = mRenderAdapter.getSelectIndex();
+        mRenderAdapter.setSelectIndex(position);
+        mRenderAdapter.notifyItemChanged(selectIndex);
+        mRenderAdapter.notifyItemChanged(position);
+        mGLSurfaceView.setRenderMode(RENDERMODE_WHEN_DIRTY);
+        mGLSurfaceView.setRatio(mGLSurfaceView.getWidth(), mGLSurfaceView.getHeight());
+        mGLRender.setRenderType(position);
+        mGLSurfaceView.requestRender();
+        mRenderDialog.cancel();
     }
 }

@@ -10,4 +10,8 @@ public class MyGlSurfaceView extends GLSurfaceView {
         setRenderer(renderer);
         setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
     }
+
+    public void setRatio(int width, int height) {
+
+    }
 }

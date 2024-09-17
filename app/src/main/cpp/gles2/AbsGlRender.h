@@ -6,7 +6,7 @@
 #define OPENGLES_DOC_TEXTUREIMAGERENDER_H
 
 #include "NativeAssetsLoader.h"
-#include "header.h"
+#include "../header.h"
 #include "GLUtils.h"
 
 static inline void checkGlError(const char *op) {

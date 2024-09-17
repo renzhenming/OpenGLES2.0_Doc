@@ -5,7 +5,7 @@
 //
 
 #include "TriangleRenderVBO_EBO.h"
-#include "header.h"
+#include "../header.h"
 #include "NativeAssetsLoader.h"
 
 static TriangleRenderVBO_EBO *render;

@@ -6,7 +6,7 @@
 #define OPENGLES_DOC_NATIVEASSETSLOADER_H
 
 #include <jni.h>
-#include "header.h"
+#include "../header.h"
 
 class NativeAssetsLoader {
 

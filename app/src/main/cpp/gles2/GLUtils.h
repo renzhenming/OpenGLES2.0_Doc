@@ -5,7 +5,7 @@
 #ifndef OPENGLES_DOC_GLUTILS_H
 #define OPENGLES_DOC_GLUTILS_H
 
-#include "header.h"
+#include "../header.h"
 
 static float cube_pos[] = {
         -1.0f, 1.0f, 1.0f,    //正面左上0

@@ -5,7 +5,7 @@
 #ifndef OPENGLES_DOC_CAMERARENDER_H
 #define OPENGLES_DOC_CAMERARENDER_H
 
-#include "header.h"
+#include "../header.h"
 #include "GLUtils.h"
 #include "NativeAssetsLoader.h"
 

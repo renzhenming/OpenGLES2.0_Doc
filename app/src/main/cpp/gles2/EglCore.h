@@ -4,7 +4,7 @@
 
 #ifndef OPENGLES_DOC_EGLCORE_H
 #define OPENGLES_DOC_EGLCORE_H
-#include "header.h"
+#include "../header.h"
 
 class EglCore {
 public:

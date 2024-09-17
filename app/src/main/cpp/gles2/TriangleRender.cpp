@@ -4,7 +4,7 @@
 #include "TriangleRender.h"
 #include "NativeAssetsLoader.h"
 #include "GLUtils.h"
-#include "header.h"
+#include "../header.h"
 
 TriangleRender::TriangleRender(JNIEnv *env, jobject asset) {
     loader = new NativeAssetsLoader(env, asset);

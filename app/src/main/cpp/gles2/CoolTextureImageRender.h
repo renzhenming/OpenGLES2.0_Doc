@@ -5,7 +5,7 @@
 #ifndef OPENGLES_DOC_COOLTEXTUREIMAGERENDER_H
 #define OPENGLES_DOC_COOLTEXTUREIMAGERENDER_H
 
-#include "header.h"
+#include "../header.h"
 #include "GLUtils.h"
 #include "NativeAssetsLoader.h"
 class CoolTextureImageRender {

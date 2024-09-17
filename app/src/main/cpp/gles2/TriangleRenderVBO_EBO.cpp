@@ -4,7 +4,7 @@
 #include "TriangleRenderVBO_EBO.h"
 #include "NativeAssetsLoader.h"
 #include "GLUtils.h"
-#include "header.h"
+#include "../header.h"
 
 TriangleRenderVBO_EBO::TriangleRenderVBO_EBO(JNIEnv *env, jobject asset) {
     loader = new NativeAssetsLoader(env, asset);

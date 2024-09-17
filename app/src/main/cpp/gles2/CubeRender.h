@@ -4,7 +4,7 @@
 
 #ifndef OPENGLES_DOC_CUBERENDER_H
 #define OPENGLES_DOC_CUBERENDER_H
-#include "header.h"
+#include "../header.h"
 
 class CubeRender {
 private:

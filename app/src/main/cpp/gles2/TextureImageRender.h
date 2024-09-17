@@ -5,7 +5,7 @@
 #ifndef OPENGLES_DOC_TEXTUREIMAGERENDER_H
 #define OPENGLES_DOC_TEXTUREIMAGERENDER_H
 #include "NativeAssetsLoader.h"
-#include "header.h"
+#include "../header.h"
 #include "GLUtils.h"
 
 class TextureImageRender {
