@@ -13,8 +13,8 @@
 #include <android/asset_manager.h>
 #include <android/asset_manager_jni.h>
 
-#include "Glm/glm.hpp"
-#include "Glm/ext.hpp"
+#include "../Glm/glm.hpp"
+#include "../Glm/ext.hpp"
 #include "stb_image_aug.h"
 
 #include <EGL/egl.h>

@@ -14,57 +14,20 @@ project("opengles_doc")
 # You can define multiple libraries, and CMake builds them for you.
 # Gradle automatically packages shared libraries with your APK.
 # 遍历当前目录及其子目录下的所有 .cpp .c 文件，并将它们的路径存储在 SOURCE_FILES 变量中
-file(GLOB GLES_SOURCE_FILE *.cpp *.c)
+file(GLOB GLES_SOURCE_FILE
+        ${CMAKE_CURRENT_SOURCE_DIR}/gles2/*.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/gles2/*.c)
 
-add_library( # Sets the name of the library.
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/gles2)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/gles3)
+
+add_library(
+        # Sets the name of the library.
         opengles
-
         # Sets the library as a shared library.
         SHARED
-        ${GLES_SOURCE_FILE}
-#        header.cpp
-#        TriangleRenderScheduler.cpp
-#        TriangleRender.cpp
-#        NativeAssetsLoader.cpp
-#        GLUtils.cpp
-#        TriangleRenderSchedulerWithMatrix.cpp
-#        TriangleRenderWithMatrix.cpp
-#        SquareRenderScheduler.cpp
-#        SquareRender.cpp
-#        CubeRenderScheduler.cpp
-#        CubeRender.cpp
-#        TextureImageRenderScheduler.cpp
-#        TextureImageRender.cpp
-#        stb_image_aug.c
-#        GrayTextureImageRenderScheduler.cpp
-#        GrayTextureImageRender.cpp
-#        CoolTextureImageRenderScheduler.cpp
-#        CoolTextureImageRender.cpp
-#        WarmTextureImageRenderScheduler.cpp
-#        WarmTextureImageRender.cpp
-#        MagnifierTextureImageRenderScheduler.cpp
-#        MagnifierTextureImageRender.cpp
-#        BlurTextureImageRenderScheduler.cpp
-#        BlurTextureImageRender.cpp
-#        CubeTransformRenderScheduler.cpp
-#        CubeTransformRender.cpp
-#        Cube.cpp
-#        CameraRenderScheduler.cpp
-#        CameraRender.cpp
-#        EglBackgroundRender.cpp
-#        EglCore.cpp
-#        EGLGrayFilter.cpp
-#        FboRenderScheduler.cpp
-#        FboRender.cpp
-#        EtcRenderScheduler.cpp
-#        EtcRender.cpp
-#        TextureRender.cpp
-#        AbsGlRender.cpp
-#        YUV420RenderScheduler.cpp
-#        YUV420Render.cpp
-#        TriangleRenderSchedulerVBO_EBO.cpp
-#        TriangleRenderVBO_EBO.cpp
         # Provides a relative path to your source file(s).
+        ${GLES_SOURCE_FILE}
         )
 
 # Searches for a specified prebuilt library and stores the path as a
@@ -88,7 +51,7 @@ target_link_libraries( # Specifies the target library.
         opengles
         android
         jnigraphics
-#        GLESv2
+        #GLESv2
         #v3版本兼容v2，所以链接v3既能保证使用v2的api又能同时使用v3的api
         GLESv3
         EGL
