@@ -38,7 +38,13 @@ UpdateMatrix(JNIEnv *env, jobject obj, jfloat rotateX, jfloat rotateY, jfloat sc
 JNIEXPORT void JNICALL
 SetImage(JNIEnv *env, jobject obj, jint format, jint width, jint height, jbyteArray image_data) {
     __android_log_print(ANDROID_LOG_INFO, "rzm", "JNI SetImage");
-    RenderManager::Get()->SetImage(format, width, height, nullptr);
+    jsize length = env->GetArrayLength(image_data);
+    unsigned char *buf = new unsigned char[length];
+    env->GetByteArrayRegion(image_data, 0, length, (jbyte *) buf);
+    RenderManager::Get()->SetImage(format, width, height, buf);
+    //有人问这里直接删除内存了，不会出错吗，其实在SetImage中会进行数据拷贝，所以删除没有关系
+    delete[]buf;
+    env->DeleteLocalRef(image_data);
 }
 
 JNIEXPORT void JNICALL OnSurfaceCreated(JNIEnv *env, jobject obj) {
@@ -51,9 +57,9 @@ JNIEXPORT void JNICALL OnSurfaceChanged(JNIEnv *env, jobject obj, jint width, ji
     RenderManager::Get()->OnSurfaceChanged(width, height);
 }
 
-JNIEXPORT void JNICALL OnDrawFrame(JNIEnv *env, jobject obj, jint renderType) {
+JNIEXPORT void JNICALL OnDrawFrame(JNIEnv *env, jobject obj) {
     __android_log_print(ANDROID_LOG_INFO, "rzm", "JNI OnDrawFrame");
-    RenderManager::Get()->OnSurfaceCreated();
+    RenderManager::Get()->OnDrawFrame();
 }
 
 #ifdef __cplusplus

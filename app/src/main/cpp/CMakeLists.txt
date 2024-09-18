@@ -20,10 +20,12 @@ file(GLOB GLES_SOURCE_FILE
 
 file(GLOB GLES3_SOURCE_FILE
         ${CMAKE_CURRENT_SOURCE_DIR}/gles3/*.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/gles3/render/*.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/gles3/*.c)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/gles2)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/gles3)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/gles3/render)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 add_library(

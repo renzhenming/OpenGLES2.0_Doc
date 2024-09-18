@@ -5,10 +5,16 @@
 #ifndef OPENGLES_DOC_RENDERMANAGER_H
 #define OPENGLES_DOC_RENDERMANAGER_H
 
+#include "GLBaseRender.h"
 
 class RenderManager {
 
 protected:
+    int mWidth;
+    int mHeight;
+    GLBaseRender *mCurrentRender;
+    GLBaseRender *mLastRender;
+
     static RenderManager *render_manager;
 
     RenderManager();
