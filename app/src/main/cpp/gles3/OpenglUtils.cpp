@@ -43,3 +43,9 @@ GLuint OpenglUtils::CreateProgram(GLuint vertex_shader, GLuint fragment_shader) 
     }
     return program;
 }
+
+void OpenglUtils::checkGlError(const char *op) {
+    for (GLint error = glGetError(); error; error = glGetError()) {
+        __android_log_print(ANDROID_LOG_ERROR, "rzm", "after %s() glError (0x%x)\n", op, error);
+    }
+}

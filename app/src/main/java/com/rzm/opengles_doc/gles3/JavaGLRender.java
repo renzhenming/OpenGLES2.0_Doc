@@ -1,5 +1,6 @@
 package com.rzm.opengles_doc.gles3;
 
+import android.graphics.Bitmap;
 import android.opengl.GLSurfaceView;
 
 import javax.microedition.khronos.egl.EGLConfig;
@@ -28,8 +29,8 @@ public class JavaGLRender implements GLSurfaceView.Renderer {
         mNativeRender.updateMatrix(rotateX, rotateY, scaleX, scaleY);
     }
 
-    public void setImage(int format, int width, int height, byte[] bytes) {
-        mNativeRender.setImage(format, width, height, bytes);
+    public void setImage(Bitmap bitmap) {
+        mNativeRender.setImage(bitmap);
     }
 
 

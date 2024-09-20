@@ -11,7 +11,9 @@ class OpenglUtils {
 public:
     static GLuint CompileShader(GLenum shader_type, const char *shader_sources);
 
-    static GLuint CreateProgram(GLuint vertex_shader,GLuint fragment_shader);
+    static GLuint CreateProgram(GLuint vertex_shader, GLuint fragment_shader);
+
+    static void checkGlError(const char *op);
 };
 
 

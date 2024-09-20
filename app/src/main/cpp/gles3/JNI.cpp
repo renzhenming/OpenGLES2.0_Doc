@@ -36,15 +36,26 @@ UpdateMatrix(JNIEnv *env, jobject obj, jfloat rotateX, jfloat rotateY, jfloat sc
 }
 
 JNIEXPORT void JNICALL
-SetImage(JNIEnv *env, jobject obj, jint format, jint width, jint height, jbyteArray image_data) {
+SetImage(JNIEnv *env, jobject obj, jobject bitmap) {
     __android_log_print(ANDROID_LOG_INFO, "rzm", "JNI SetImage");
-    jsize length = env->GetArrayLength(image_data);
-    unsigned char *buf = new unsigned char[length];
-    env->GetByteArrayRegion(image_data, 0, length, (jbyte *) buf);
-    RenderManager::Get()->SetImage(format, width, height, buf);
-    //有人问这里直接删除内存了，不会出错吗，其实在SetImage中会进行数据拷贝，所以删除没有关系
-    delete[]buf;
-    env->DeleteLocalRef(image_data);
+    AndroidBitmapInfo info;
+    int ret = AndroidBitmap_getInfo(env, bitmap, &info);
+    if (ret < 0) {
+        __android_log_print(ANDROID_LOG_ERROR, "rzm", "AndroidBitmap_getInfo fail");
+        return;
+    }
+    void *data;
+    ret = AndroidBitmap_lockPixels(env, bitmap, &data);
+    if (ret < 0) {
+        __android_log_print(ANDROID_LOG_ERROR, "rzm", "AndroidBitmap_lockPixels fail");
+        return;
+    }
+    RenderManager::Get()->SetImage(info.format, info.width, info.height, data);
+    ret = AndroidBitmap_unlockPixels(env, bitmap);
+    if (ret < 0) {
+        __android_log_print(ANDROID_LOG_ERROR, "rzm", "AndroidBitmap_unlockPixels fail");
+        return;
+    }
 }
 
 JNIEXPORT void JNICALL OnSurfaceCreated(JNIEnv *env, jobject obj) {
@@ -67,14 +78,14 @@ JNIEXPORT void JNICALL OnDrawFrame(JNIEnv *env, jobject obj) {
 #endif
 
 static JNINativeMethod methods[] = {
-        {"init",             "()V",      (void *) (Init)},
-        {"destroy",          "()V",      (void *) (Destroy)},
-        {"setRenderType",    "(I)V",     (void *) (SetRenderType)},
-        {"updateMatrix",     "(FFFF)V",  (void *) (UpdateMatrix)},
-        {"setImage",         "(III[B)V", (void *) (SetImage)},
-        {"onSurfaceCreated", "()V",      (void *) (OnSurfaceCreated)},
-        {"onSurfaceChanged", "(II)V",    (void *) (OnSurfaceChanged)},
-        {"onDrawFrame",      "()V",      (void *) (OnDrawFrame)},
+        {"init",             "()V",                          (void *) (Init)},
+        {"destroy",          "()V",                          (void *) (Destroy)},
+        {"setRenderType",    "(I)V",                         (void *) (SetRenderType)},
+        {"updateMatrix",     "(FFFF)V",                      (void *) (UpdateMatrix)},
+        {"setImage",         "(Landroid/graphics/Bitmap;)V", (void *) (SetImage)},
+        {"onSurfaceCreated", "()V",                          (void *) (OnSurfaceCreated)},
+        {"onSurfaceChanged", "(II)V",                        (void *) (OnSurfaceChanged)},
+        {"onDrawFrame",      "()V",                          (void *) (OnDrawFrame)},
 };
 
 extern "C" jint JNI_OnLoad(JavaVM *vm, void *p) {

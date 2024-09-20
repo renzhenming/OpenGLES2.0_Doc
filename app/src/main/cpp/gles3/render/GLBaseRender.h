@@ -7,6 +7,24 @@
 
 #include "header.h"
 
+#define RENDER_TYPE_BASE           100
+#define RENDER_TYPE_TRIANGLE       RENDER_TYPE_BASE
+#define RENDER_TYPE_TEXTURE        RENDER_TYPE_BASE+1
+
+struct Image {
+    int width;
+    int height;
+    int format;
+    unsigned char *image_data;
+
+    Image() {
+        width = 0;
+        height = 0;
+        format = 0;
+        image_data = nullptr;
+    }
+};
+
 class GLBaseRender {
 
 public:
@@ -23,6 +41,8 @@ public:
     }
 
     virtual void Init() = 0;
+
+    virtual void setImage(int format, int width, int height, void *data) {}
 
     virtual void Draw(int width, int height) = 0;
 

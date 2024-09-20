@@ -26,7 +26,7 @@ public:
 
     void UpdateMatrix(float rotateX, float rotateY, float scaleX, float scaleY);
 
-    void SetImage(int format, int width, int height, unsigned char *image_data);
+    void SetImage(int format, int width, int height, void *image_data);
 
     void OnSurfaceCreated();
 

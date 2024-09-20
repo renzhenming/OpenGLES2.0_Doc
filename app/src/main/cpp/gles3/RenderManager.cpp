@@ -5,6 +5,7 @@
 #include "RenderManager.h"
 #include "header.h"
 #include "GLTriangleRender.h"
+#include "GLTextureRender.h"
 
 RenderManager *RenderManager::render_manager = nullptr;
 
@@ -39,6 +40,15 @@ RenderManager::~RenderManager() {
 
 void RenderManager::SetRenderType(int renderType) {
     __android_log_print(ANDROID_LOG_INFO, "rzm", "RenderManager SetRenderType %d ", renderType);
+    mLastRender = mCurrentRender;
+    switch (renderType) {
+        case RENDER_TYPE_TRIANGLE:
+            mCurrentRender = new GLTriangleRender();
+            break;
+        case RENDER_TYPE_TEXTURE:
+            mCurrentRender = new GLTextureRender();
+            break;
+    }
 }
 
 void RenderManager::UpdateMatrix(float rotateX, float rotateY, float scaleX, float scaleY) {
@@ -47,10 +57,13 @@ void RenderManager::UpdateMatrix(float rotateX, float rotateY, float scaleX, flo
                         rotateX, rotateY, scaleX, scaleY);
 }
 
-void RenderManager::SetImage(int format, int width, int height, unsigned char *image_data) {
+void RenderManager::SetImage(int format, int width, int height, void *image_data) {
     __android_log_print(ANDROID_LOG_INFO, "rzm",
                         "RenderManager SetImage format:%d width:%d height:%d",
                         format, width, height);
+    if (mCurrentRender != nullptr) {
+        mCurrentRender->setImage(format, width, height, image_data);
+    }
 }
 
 void RenderManager::OnSurfaceCreated() {
