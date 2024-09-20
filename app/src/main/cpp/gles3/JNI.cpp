@@ -36,26 +36,14 @@ UpdateMatrix(JNIEnv *env, jobject obj, jfloat rotateX, jfloat rotateY, jfloat sc
 }
 
 JNIEXPORT void JNICALL
-SetImage(JNIEnv *env, jobject obj, jobject bitmap) {
+SetImage(JNIEnv *env, jobject obj, jint format, jint width, jint height, jbyteArray bytes) {
     __android_log_print(ANDROID_LOG_INFO, "rzm", "JNI SetImage");
-    AndroidBitmapInfo info;
-    int ret = AndroidBitmap_getInfo(env, bitmap, &info);
-    if (ret < 0) {
-        __android_log_print(ANDROID_LOG_ERROR, "rzm", "AndroidBitmap_getInfo fail");
-        return;
-    }
-    void *data;
-    ret = AndroidBitmap_lockPixels(env, bitmap, &data);
-    if (ret < 0) {
-        __android_log_print(ANDROID_LOG_ERROR, "rzm", "AndroidBitmap_lockPixels fail");
-        return;
-    }
-    RenderManager::Get()->SetImage(info.format, info.width, info.height, data);
-    ret = AndroidBitmap_unlockPixels(env, bitmap);
-    if (ret < 0) {
-        __android_log_print(ANDROID_LOG_ERROR, "rzm", "AndroidBitmap_unlockPixels fail");
-        return;
-    }
+    jsize length = env->GetArrayLength(bytes);
+    jbyte *buffer = new jbyte[length];
+    env->GetByteArrayRegion(bytes, 0, length, buffer);
+    RenderManager::Get()->SetImage(format, width, height, buffer);
+    delete[]buffer;
+    env->DeleteLocalRef(bytes);
 }
 
 JNIEXPORT void JNICALL OnSurfaceCreated(JNIEnv *env, jobject obj) {
@@ -78,14 +66,14 @@ JNIEXPORT void JNICALL OnDrawFrame(JNIEnv *env, jobject obj) {
 #endif
 
 static JNINativeMethod methods[] = {
-        {"init",             "()V",                          (void *) (Init)},
-        {"destroy",          "()V",                          (void *) (Destroy)},
-        {"setRenderType",    "(I)V",                         (void *) (SetRenderType)},
-        {"updateMatrix",     "(FFFF)V",                      (void *) (UpdateMatrix)},
-        {"setImage",         "(Landroid/graphics/Bitmap;)V", (void *) (SetImage)},
-        {"onSurfaceCreated", "()V",                          (void *) (OnSurfaceCreated)},
-        {"onSurfaceChanged", "(II)V",                        (void *) (OnSurfaceChanged)},
-        {"onDrawFrame",      "()V",                          (void *) (OnDrawFrame)},
+        {"init",             "()V",      (void *) (Init)},
+        {"destroy",          "()V",      (void *) (Destroy)},
+        {"setRenderType",    "(I)V",     (void *) (SetRenderType)},
+        {"updateMatrix",     "(FFFF)V",  (void *) (UpdateMatrix)},
+        {"setImage",         "(III[B)V", (void *) (SetImage)},
+        {"onSurfaceCreated", "()V",      (void *) (OnSurfaceCreated)},
+        {"onSurfaceChanged", "(II)V",    (void *) (OnSurfaceChanged)},
+        {"onDrawFrame",      "()V",      (void *) (OnDrawFrame)},
 };
 
 extern "C" jint JNI_OnLoad(JavaVM *vm, void *p) {

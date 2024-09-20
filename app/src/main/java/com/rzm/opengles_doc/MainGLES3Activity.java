@@ -20,12 +20,14 @@ import com.rzm.opengles_doc.gles3.GLViewAdapter;
 import com.rzm.opengles_doc.gles3.JavaGLRender;
 import com.rzm.opengles_doc.gles3.NativeRender;
 
+import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Type;
+import java.nio.ByteBuffer;
 import java.util.Arrays;
 
 public class MainGLES3Activity extends AppCompatActivity implements GLViewAdapter.OnItemClickListener {
 
+    public static final int IMAGE_FORMAT_RGBA = 0x01;
     private ViewGroup mRootView;
     private MyGlSurfaceView mGLSurfaceView;
     private JavaGLRender mGLRender;
@@ -86,16 +88,31 @@ public class MainGLES3Activity extends AppCompatActivity implements GLViewAdapte
         int renderType = NativeRender.TYPE + position;
         mGLRender.setRenderType(renderType);
 
-        switch (renderType) {
-            case NativeRender.TYPE_TRIANGLE:
-                break;
-            case NativeRender.TYPE_TEXTURE_MAP:
-                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.girl);
-                mGLRender.setImage(bitmap);
-                break;
+        try {
+            setImageDataToNative(renderType);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
 
         mGLSurfaceView.requestRender();
         mRenderDialog.cancel();
+    }
+
+    public void setImageDataToNative(int renderType) throws IOException {
+        switch (renderType) {
+            case NativeRender.TYPE_TRIANGLE:
+                break;
+            case NativeRender.TYPE_TEXTURE_MAP:
+                InputStream is = this.getAssets().open("girl.jpg");
+                Bitmap bitmap = BitmapFactory.decodeStream(is);
+                int bytes = bitmap.getByteCount();
+                ByteBuffer buf = ByteBuffer.allocate(bytes);
+                bitmap.copyPixelsToBuffer(buf);
+                byte[] byteArray = buf.array();
+                mGLRender.setImage(IMAGE_FORMAT_RGBA, bitmap.getWidth(), bitmap.getHeight(), byteArray);
+                break;
+            case NativeRender.TYPE_YUV_TEXTURE_MAP:
+                break;
+        }
     }
 }

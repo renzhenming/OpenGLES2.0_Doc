@@ -29,10 +29,9 @@ public class JavaGLRender implements GLSurfaceView.Renderer {
         mNativeRender.updateMatrix(rotateX, rotateY, scaleX, scaleY);
     }
 
-    public void setImage(Bitmap bitmap) {
-        mNativeRender.setImage(bitmap);
+    public void setImage(int format, int width, int height, byte[] bytes) {
+        mNativeRender.setImage(format, width, height, bytes);
     }
-
 
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
