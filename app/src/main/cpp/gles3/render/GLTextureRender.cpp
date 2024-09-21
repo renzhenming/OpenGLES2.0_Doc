@@ -80,10 +80,10 @@ void GLTextureRender::Draw(int width, int height) {
             1.0, 1.0, 0.0,
     };
     GLfloat texture_coord[] = {
-            1.0, 0.0,
-            1.0, 1.0,
-            0.0, 1.0,
             0.0, 0.0,
+            0.0, 1.0,
+            1.0, 1.0,
+            1.0, 0.0,
     };
     GLushort index[] = {0, 1, 2, 0, 2, 3};
     glUseProgram(mProgram);

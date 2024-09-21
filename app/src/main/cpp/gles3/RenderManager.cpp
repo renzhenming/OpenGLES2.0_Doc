@@ -6,6 +6,7 @@
 #include "header.h"
 #include "GLTriangleRender.h"
 #include "GLTextureRender.h"
+#include "GLYuvTextureRender.h"
 
 RenderManager *RenderManager::render_manager = nullptr;
 
@@ -47,6 +48,9 @@ void RenderManager::SetRenderType(int renderType) {
             break;
         case RENDER_TYPE_TEXTURE:
             mCurrentRender = new GLTextureRender();
+            break;
+        case RENDER_TYPE_YUV_TEXTURE:
+            mCurrentRender = new GLYuvTextureRender();
             break;
     }
 }

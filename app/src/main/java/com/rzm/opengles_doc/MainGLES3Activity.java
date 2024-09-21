@@ -28,10 +28,11 @@ import java.util.Arrays;
 public class MainGLES3Activity extends AppCompatActivity implements GLViewAdapter.OnItemClickListener {
 
     public static final int IMAGE_FORMAT_RGBA = 0x01;
+    public static final int IMAGE_FORMAT_NV21 = 0x02;
     private ViewGroup mRootView;
     private MyGlSurfaceView mGLSurfaceView;
     private JavaGLRender mGLRender;
-    private static final String[] ITEM_TITLES = {"绘制三角形", "纹理贴图"};
+    private static final String[] ITEM_TITLES = {"绘制三角形", "纹理贴图", "YUV纹理贴图"};
     private AlertDialog mRenderDialog;
     private GLViewAdapter mRenderAdapter;
 
@@ -112,6 +113,11 @@ public class MainGLES3Activity extends AppCompatActivity implements GLViewAdapte
                 mGLRender.setImage(IMAGE_FORMAT_RGBA, bitmap.getWidth(), bitmap.getHeight(), byteArray);
                 break;
             case NativeRender.TYPE_YUV_TEXTURE_MAP:
+                is = this.getAssets().open("YUV_Image_840x1074.NV21");
+                int length = is.available();
+                byte[] buffer = new byte[length];
+                is.read(buffer);
+                mGLRender.setImage(IMAGE_FORMAT_NV21, 840, 1074, buffer);
                 break;
         }
     }
