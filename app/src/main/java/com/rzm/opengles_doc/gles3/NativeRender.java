@@ -13,6 +13,7 @@ public class NativeRender {
     public static final int TYPE_TRIANGLE = TYPE;
     public static final int TYPE_TEXTURE_MAP = TYPE + 1;
     public static final int TYPE_YUV_TEXTURE_MAP = TYPE + 2;
+    public static final int TYPE_VAO = TYPE + 3;
 
     public native void init();
 

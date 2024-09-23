@@ -5,12 +5,13 @@
 #ifndef OPENGLES_DOC_GLBASERENDER_H
 #define OPENGLES_DOC_GLBASERENDER_H
 
-#include "header.h"
+#include "header2.h"
 
 #define RENDER_TYPE_BASE                100
 #define RENDER_TYPE_TRIANGLE            RENDER_TYPE_BASE
 #define RENDER_TYPE_TEXTURE             RENDER_TYPE_BASE+1
 #define RENDER_TYPE_YUV_TEXTURE         RENDER_TYPE_BASE+2
+#define RENDER_TYPE_VAO                 RENDER_TYPE_BASE+3
 
 struct Image {
     int width;

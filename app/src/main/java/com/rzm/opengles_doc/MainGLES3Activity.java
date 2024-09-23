@@ -32,7 +32,7 @@ public class MainGLES3Activity extends AppCompatActivity implements GLViewAdapte
     private ViewGroup mRootView;
     private MyGlSurfaceView mGLSurfaceView;
     private JavaGLRender mGLRender;
-    private static final String[] ITEM_TITLES = {"绘制三角形", "纹理贴图", "YUV纹理贴图"};
+    private static final String[] ITEM_TITLES = {"绘制三角形", "纹理贴图", "YUV纹理贴图", "VAO VBO绘制正方形"};
     private AlertDialog mRenderDialog;
     private GLViewAdapter mRenderAdapter;
 
@@ -118,6 +118,8 @@ public class MainGLES3Activity extends AppCompatActivity implements GLViewAdapte
                 byte[] buffer = new byte[length];
                 is.read(buffer);
                 mGLRender.setImage(IMAGE_FORMAT_NV21, 840, 1074, buffer);
+                break;
+            case NativeRender.TYPE_VAO:
                 break;
         }
     }
