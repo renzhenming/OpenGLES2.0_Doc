@@ -8,6 +8,7 @@
 #include "GLTextureRender.h"
 #include "GLYuvTextureRender.h"
 #include "GLVaoRender.h"
+#include "GLFboRender.h"
 
 RenderManager *RenderManager::render_manager = nullptr;
 
@@ -55,6 +56,9 @@ void RenderManager::SetRenderType(int renderType) {
             break;
         case RENDER_TYPE_VAO:
             mCurrentRender = new GLVaoRender();
+            break;
+        case RENDER_TYPE_FBO:
+            mCurrentRender = new GLFboRender();
             break;
     }
 }

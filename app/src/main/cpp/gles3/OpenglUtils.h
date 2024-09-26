@@ -7,6 +7,10 @@
 
 #include "header.h"
 
+#define TAGS "rzm"
+#define LOG(...) __android_log_print(ANDROID_LOG_INFO,TAGS,__VA_ARGS__)
+#define CHECK_GL_ERROR(...) LOG("CHECK_GL_ERROR function:%s, glGetError:%s, line:%d ",__FUNCTION__,glGetError(),__LINE__)
+
 class OpenglUtils {
 public:
     static GLuint CompileShader(GLenum shader_type, const char *shader_sources);

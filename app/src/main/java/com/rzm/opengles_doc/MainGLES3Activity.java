@@ -32,7 +32,7 @@ public class MainGLES3Activity extends AppCompatActivity implements GLViewAdapte
     private ViewGroup mRootView;
     private MyGlSurfaceView mGLSurfaceView;
     private JavaGLRender mGLRender;
-    private static final String[] ITEM_TITLES = {"绘制三角形", "纹理贴图", "YUV纹理贴图", "VAO VBO绘制正方形"};
+    private static final String[] ITEM_TITLES = {"绘制三角形", "纹理贴图", "YUV纹理贴图", "VAO VBO绘制正方形", "FBO"};
     private AlertDialog mRenderDialog;
     private GLViewAdapter mRenderAdapter;
 
@@ -104,6 +104,7 @@ public class MainGLES3Activity extends AppCompatActivity implements GLViewAdapte
             case NativeRender.TYPE_TRIANGLE:
                 break;
             case NativeRender.TYPE_TEXTURE_MAP:
+            case NativeRender.TYPE_FBO:
                 InputStream is = this.getAssets().open("girl.jpg");
                 Bitmap bitmap = BitmapFactory.decodeStream(is);
                 int bytes = bitmap.getByteCount();
