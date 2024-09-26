@@ -12,6 +12,7 @@ class GLFboRender : public GLBaseRender {
 public:
     GLuint fbo;
     GLuint vao[2];
+    GLuint vbo[4];
     GLuint texture;
     GLuint fbo_texture;
     GLuint mFboProgram;

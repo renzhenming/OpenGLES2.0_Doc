@@ -103,7 +103,6 @@ void GLFboRender::Init() {
                         mTextureLocation, mFboTextureLocation);
 
     // 生成 VBO ，加载顶点数据和索引数据
-    GLuint vbo[4];
     glGenBuffers(4, vbo);
     glBindBuffer(GL_ARRAY_BUFFER, vbo[0]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertex), vertex, GL_STATIC_DRAW);
@@ -226,5 +225,25 @@ void GLFboRender::Draw(int width, int height) {
 }
 
 void GLFboRender::Destroy() {
-
+    if (mProgram) {
+        glDeleteProgram(mProgram);
+    }
+    if (mFboProgram) {
+        glDeleteProgram(mFboProgram);
+    }
+    if (texture) {
+        glDeleteTextures(1, &texture);
+    }
+    if (fbo_texture) {
+        glDeleteTextures(1, &fbo_texture);
+    }
+    if (vbo) {
+        glDeleteBuffers(4, vbo);
+    }
+    if (vao) {
+        glDeleteVertexArrays(2, vao);
+    }
+    if (fbo) {
+        glDeleteFramebuffers(1, &fbo);
+    }
 }
