@@ -16,6 +16,8 @@ public class NativeRender {
     public static final int TYPE_VAO = TYPE + 3;
     public static final int TYPE_FBO = TYPE + 4;
 
+    public static final int TYPE_FBO_LONG_LEG = TYPE + 5;
+
     public native void init();
 
     public native void destroy();

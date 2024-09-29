@@ -32,7 +32,7 @@ public class MainGLES3Activity extends AppCompatActivity implements GLViewAdapte
     private ViewGroup mRootView;
     private MyGlSurfaceView mGLSurfaceView;
     private JavaGLRender mGLRender;
-    private static final String[] ITEM_TITLES = {"绘制三角形", "纹理贴图", "YUV纹理贴图", "VAO VBO绘制正方形", "FBO"};
+    private static final String[] ITEM_TITLES = {"绘制三角形", "纹理贴图", "YUV纹理贴图", "VAO VBO绘制正方形", "FBO", "FBO（长腿效果）"};
     private AlertDialog mRenderDialog;
     private GLViewAdapter mRenderAdapter;
 
@@ -121,6 +121,15 @@ public class MainGLES3Activity extends AppCompatActivity implements GLViewAdapte
                 mGLRender.setImage(IMAGE_FORMAT_NV21, 840, 1074, buffer);
                 break;
             case NativeRender.TYPE_VAO:
+                break;
+            case NativeRender.TYPE_FBO_LONG_LEG:
+                is = this.getAssets().open("leg.jpg");
+                bitmap = BitmapFactory.decodeStream(is);
+                bytes = bitmap.getByteCount();
+                buf = ByteBuffer.allocate(bytes);
+                bitmap.copyPixelsToBuffer(buf);
+                byteArray = buf.array();
+                mGLRender.setImage(IMAGE_FORMAT_RGBA, bitmap.getWidth(), bitmap.getHeight(), byteArray);
                 break;
         }
     }

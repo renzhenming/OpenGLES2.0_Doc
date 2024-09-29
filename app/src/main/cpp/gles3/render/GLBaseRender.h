@@ -14,6 +14,7 @@
 #define RENDER_TYPE_YUV_TEXTURE         RENDER_TYPE_BASE+2
 #define RENDER_TYPE_VAO                 RENDER_TYPE_BASE+3
 #define RENDER_TYPE_FBO                 RENDER_TYPE_BASE+4
+#define RENDER_TYPE_FBO_LONG_LEG        RENDER_TYPE_BASE+5
 
 struct Image {
     int width;
@@ -28,6 +29,17 @@ struct Image {
         image_data = nullptr;
     }
 };
+
+typedef struct GlRectF {
+    float left;
+    float right;
+    float top;
+    float bottom;
+
+    GlRectF() {
+        left = 0, right = 0, top = 0, bottom = 0;
+    }
+} GlRectF;
 
 class GLBaseRender {
 
