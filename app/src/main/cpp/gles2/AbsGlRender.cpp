@@ -35,7 +35,8 @@ void AbsGlRender::SurfaceChanged(int width, int height) {
 }
 
 void AbsGlRender::ConfigMatrix(int width, int height) {
-    modelMatrix = glm::translate(0.0f, 0.0f, 0.0f);
+    modelMatrix = glm::mat4(1.0f);
+    modelMatrix = glm::translate(modelMatrix, glm::vec3(0.0f, 0.0f, 0.0f));
     viewMatrix = glm::lookAt(glm::vec3(0.0f, 0.0f, 5.0f), glm::vec3(0.0f, 0.0f, 0.0f),
                              glm::vec3(0.0f, 1.0f, 0.0f));
     float ratio = (width > height) ? width / (float) height : height / (float) width;

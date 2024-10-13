@@ -137,11 +137,8 @@ void GLCoordinateSystemRender::UpdateMVPMatrix(glm::mat4 &mvp_matrix, int xAngle
     float radiansY = PI / 180.0f * yAngle;
     LOG("GLCoordinateSystemRender UpdateMVPMatrix radiansY:%f,radiansX:%f", radiansY, radiansX);
     glm::mat4 model = glm::mat4(1.0f);
-    //model = glm::rotate(model, radiansX, glm::vec3(1.0f, 0.0f, 0.0f));
-    //model = glm::rotate(model, radiansY, glm::vec3(0.0f, 1.0f, 0.0f));
-    //这个版本的glm glm::rotate(model, radiansY, glm::vec3(0.0f, 1.0f, 0.0f))方法无效
-    model = glm::rotate(model, glm::degrees(radiansX), glm::vec3(1.0f, 0.0f, 0.0f));
-    model = glm::rotate(model, glm::degrees(radiansY), glm::vec3(0.0f, 1.0f, 0.0f));
+    model = glm::rotate(model, radiansX, glm::vec3(1.0f, 0.0f, 0.0f));
+    model = glm::rotate(model, radiansY, glm::vec3(0.0f, 1.0f, 0.0f));
     glm::mat4 view = glm::lookAt(glm::vec3(0, 0, 3),
                                  glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
     glm::mat4 projection = glm::perspective(45.0f, ratio, 0.1f, 100.0f);

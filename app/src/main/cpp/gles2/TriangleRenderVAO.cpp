@@ -24,11 +24,13 @@ void TriangleRenderVAO::CreateSurface() {
     projectionMatrixLocation = glGetUniformLocation(program, "U_ProjectionMatrix");
     colorLocation = glGetAttribLocation(program, "aColor");
 
-    modelMatrix = glm::translate(0.0f, 0.0f, 0.0f);
+    modelMatrix = glm::mat4(1.0f);
+    modelMatrix = glm::translate(modelMatrix, glm::vec3(0.0f, 0.0f, 0.0f));
     viewMatrix = glm::lookAt(glm::vec3(0.0f, 0.0f, 7.0f), glm::vec3(0.0, 0.0, 0.0f),
                              glm::vec3(0.0, 1.0f, 0.0f));
 
-    modelMatrix2 = glm::translate(1.0f, 1.0f, 0.0f);
+    modelMatrix2 = glm::mat4(1.0f);
+    modelMatrix2 = glm::translate(modelMatrix, glm::vec3(1.0f, 1.0f, 0.0f));
 
     glGenBuffers(1, &vbo);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
