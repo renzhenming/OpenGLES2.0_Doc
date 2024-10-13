@@ -24,7 +24,7 @@ protected:
 public:
     void SetRenderType(int renderType);
 
-    void UpdateMatrix(float rotateX, float rotateY, float scaleX, float scaleY);
+    void UpdateMatrix(float rotateX, float rotateY);
 
     void SetImage(int format, int width, int height, void *image_data);
 

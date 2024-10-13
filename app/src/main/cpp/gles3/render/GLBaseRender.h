@@ -15,6 +15,7 @@
 #define RENDER_TYPE_VAO                 RENDER_TYPE_BASE+3
 #define RENDER_TYPE_FBO                 RENDER_TYPE_BASE+4
 #define RENDER_TYPE_FBO_LONG_LEG        RENDER_TYPE_BASE+5
+#define RENDER_TYPE_COORDINATE_SYSTEM        RENDER_TYPE_BASE+6
 
 struct Image {
     int width;
@@ -66,6 +67,8 @@ public:
     virtual void Init() = 0;
 
     virtual void setImage(int format, int width, int height, void *data) {}
+
+    virtual void UpdateMatrix(float rotateX, float rotateY) {}
 
     virtual void Draw(int width, int height) = 0;
 

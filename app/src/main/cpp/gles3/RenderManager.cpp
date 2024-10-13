@@ -10,6 +10,7 @@
 #include "GLVaoRender.h"
 #include "GLFboRender.h"
 #include "GLLongLegRender.h"
+#include "GLCoordinateSystemRender.h"
 
 RenderManager *RenderManager::render_manager = nullptr;
 
@@ -65,13 +66,18 @@ void RenderManager::SetRenderType(int renderType) {
             //mCurrentRender = new GLFboLongLegRender();
             mCurrentRender = new GLLongLegRender();
             break;
+        case RENDER_TYPE_COORDINATE_SYSTEM:
+            mCurrentRender = new GLCoordinateSystemRender();
+            break;
     }
 }
 
-void RenderManager::UpdateMatrix(float rotateX, float rotateY, float scaleX, float scaleY) {
+void RenderManager::UpdateMatrix(float rotateX, float rotateY) {
     __android_log_print(ANDROID_LOG_INFO, "rzm",
-                        "RenderManager UpdateMatrix rotateX:%d rotateY:%d scaleX:%d scaleY:%d",
-                        rotateX, rotateY, scaleX, scaleY);
+                        "RenderManager UpdateMatrix rotateX:%d rotateY:%d", rotateX, rotateY);
+    if (mCurrentRender != nullptr) {
+        mCurrentRender->UpdateMatrix(rotateX, rotateY);
+    }
 }
 
 void RenderManager::SetImage(int format, int width, int height, void *image_data) {
@@ -98,6 +104,7 @@ void RenderManager::OnSurfaceChanged(int width, int height) {
 
 void RenderManager::OnDrawFrame() {
     __android_log_print(ANDROID_LOG_INFO, "rzm", "RenderManager OnDrawFrame");
+    glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
     if (mLastRender != nullptr) {
         mLastRender->Destroy();
         delete mLastRender;

@@ -29,10 +29,9 @@ JNIEXPORT void JNICALL SetRenderType(JNIEnv *env, jobject obj, jint renderType) 
 }
 
 JNIEXPORT void JNICALL
-UpdateMatrix(JNIEnv *env, jobject obj, jfloat rotateX, jfloat rotateY, jfloat scaleX,
-             jfloat scaleY) {
+UpdateMatrix(JNIEnv *env, jobject obj, jfloat rotateX, jfloat rotateY) {
     __android_log_print(ANDROID_LOG_INFO, "rzm", "JNI UpdateMatrix");
-    RenderManager::Get()->UpdateMatrix(rotateX, rotateY, scaleX, scaleY);
+    RenderManager::Get()->UpdateMatrix(rotateX, rotateY);
 }
 
 JNIEXPORT void JNICALL
@@ -69,7 +68,7 @@ static JNINativeMethod methods[] = {
         {"init",             "()V",      (void *) (Init)},
         {"destroy",          "()V",      (void *) (Destroy)},
         {"setRenderType",    "(I)V",     (void *) (SetRenderType)},
-        {"updateMatrix",     "(FFFF)V",  (void *) (UpdateMatrix)},
+        {"updateMatrix",     "(FF)V",  (void *) (UpdateMatrix)},
         {"setImage",         "(III[B)V", (void *) (SetImage)},
         {"onSurfaceCreated", "()V",      (void *) (OnSurfaceCreated)},
         {"onSurfaceChanged", "(II)V",    (void *) (OnSurfaceChanged)},

@@ -25,8 +25,8 @@ public class JavaGLRender implements GLSurfaceView.Renderer {
         mNativeRender.setRenderType(renderType);
     }
 
-    public void updateMatrix(float rotateX, float rotateY, float scaleX, float scaleY) {
-        mNativeRender.updateMatrix(rotateX, rotateY, scaleX, scaleY);
+    public void updateMatrix(float rotateX, float rotateY) {
+        mNativeRender.updateMatrix(rotateX, rotateY);
     }
 
     public void setImage(int format, int width, int height, byte[] bytes) {

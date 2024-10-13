@@ -17,6 +17,7 @@ public class NativeRender {
     public static final int TYPE_FBO = TYPE + 4;
 
     public static final int TYPE_FBO_LONG_LEG = TYPE + 5;
+    public static final int TYPE_COORDINATE_SYSTEM = TYPE + 6;
 
     public native void init();
 
@@ -24,7 +25,7 @@ public class NativeRender {
 
     public native void setRenderType(int renderType);
 
-    public native void updateMatrix(float rotateX, float rotateY, float scaleX, float scaleY);
+    public native void updateMatrix(float rotateX, float rotateY);
 
     public native void setImage(int format, int width, int height, byte[] bytes);
 

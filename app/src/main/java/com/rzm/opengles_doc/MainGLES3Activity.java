@@ -30,9 +30,9 @@ public class MainGLES3Activity extends AppCompatActivity implements GLViewAdapte
     public static final int IMAGE_FORMAT_RGBA = 0x01;
     public static final int IMAGE_FORMAT_NV21 = 0x02;
     private ViewGroup mRootView;
-    private MyGlSurfaceView mGLSurfaceView;
+    private MyGlSurfaceView2 mGLSurfaceView;
     private JavaGLRender mGLRender;
-    private static final String[] ITEM_TITLES = {"绘制三角形", "纹理贴图", "YUV纹理贴图", "VAO VBO绘制正方形", "FBO", "FBO（长腿效果）"};
+    private static final String[] ITEM_TITLES = {"绘制三角形", "纹理贴图", "YUV纹理贴图", "VAO VBO绘制正方形", "FBO", "FBO（长腿效果）", "坐标系统"};
     private AlertDialog mRenderDialog;
     private GLViewAdapter mRenderAdapter;
 
@@ -78,14 +78,13 @@ public class MainGLES3Activity extends AppCompatActivity implements GLViewAdapte
     public void onItemClick(View view, int position) {
         mRootView.removeView(mGLSurfaceView);
         ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        mGLSurfaceView = new MyGlSurfaceView(MainGLES3Activity.this, mGLRender);
+        mGLSurfaceView = new MyGlSurfaceView2(MainGLES3Activity.this, mGLRender);
         mRootView.addView(mGLSurfaceView, params);
         int selectIndex = mRenderAdapter.getSelectIndex();
         mRenderAdapter.setSelectIndex(position);
         mRenderAdapter.notifyItemChanged(selectIndex);
         mRenderAdapter.notifyItemChanged(position);
         mGLSurfaceView.setRenderMode(RENDERMODE_WHEN_DIRTY);
-        mGLSurfaceView.setRatio(mGLSurfaceView.getWidth(), mGLSurfaceView.getHeight());
         int renderType = NativeRender.TYPE + position;
         mGLRender.setRenderType(renderType);
 
@@ -105,6 +104,7 @@ public class MainGLES3Activity extends AppCompatActivity implements GLViewAdapte
                 break;
             case NativeRender.TYPE_TEXTURE_MAP:
             case NativeRender.TYPE_FBO:
+            case NativeRender.TYPE_COORDINATE_SYSTEM:
                 InputStream is = this.getAssets().open("girl.jpg");
                 Bitmap bitmap = BitmapFactory.decodeStream(is);
                 int bytes = bitmap.getByteCount();
