@@ -18,6 +18,7 @@ public class NativeRender {
 
     public static final int TYPE_FBO_LONG_LEG = TYPE + 5;
     public static final int TYPE_COORDINATE_SYSTEM = TYPE + 6;
+    public static final int TYPE_DEPTH_TESTING = TYPE + 7;
 
     public native void init();
 

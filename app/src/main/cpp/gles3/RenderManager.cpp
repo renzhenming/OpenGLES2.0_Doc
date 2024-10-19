@@ -11,6 +11,7 @@
 #include "GLFboRender.h"
 #include "GLLongLegRender.h"
 #include "GLCoordinateSystemRender.h"
+#include "GLDepthTestRender.h"
 
 RenderManager *RenderManager::render_manager = nullptr;
 
@@ -68,6 +69,9 @@ void RenderManager::SetRenderType(int renderType) {
             break;
         case RENDER_TYPE_COORDINATE_SYSTEM:
             mCurrentRender = new GLCoordinateSystemRender();
+            break;
+        case RENDER_TYPE_DEPTH_TESTING:
+            mCurrentRender = new GLDepthTestRender();
             break;
     }
 }
